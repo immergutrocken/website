@@ -3,7 +3,7 @@ interface IClassName {
 }
 
 interface BubbleProps extends IClassName {
-  children: JSX.Element;
+  children: JSX.Element | string;
   onClick?: () => void;
   size?: "small" | "large";
 }

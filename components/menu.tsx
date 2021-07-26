@@ -62,6 +62,14 @@ const Menu = ({
           </div>
         ))}
       </div>
+      <div className="flex justify-center">
+        <Bubble
+          className="text-xl pt-3 sm:text-3xl sm:pt-4"
+          onClick={() => console.log("set to english")}
+        >
+          en
+        </Bubble>
+      </div>
     </div>
   );
 };
