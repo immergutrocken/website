@@ -16,6 +16,7 @@ import Layout from "../components/layout";
 import styles from "../styles/Home.module.scss";
 import { getNotificationList, INotification } from "../lib/notification";
 import useWindowScroll from "@react-hook/window-scroll";
+import { useLocalization } from "../components/shared/localization";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -47,6 +48,7 @@ export default function Home(props: HomeProps): JSX.Element {
   const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const [showMenu, setShowMenu] = useState(false);
   const scroll = useWindowScroll(60);
+  const { getLocale, onToggleLocale } = useLocalization();
 
   return (
     <Layout
@@ -70,9 +72,9 @@ export default function Home(props: HomeProps): JSX.Element {
       />
       <Bubble
         className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl pt-3 sm:text-3xl sm:pt-4"
-        onClick={() => console.log("set to english")}
+        onClick={() => onToggleLocale()}
       >
-        en
+        {getLocale()}
       </Bubble>
       <div className="block sm:hidden">
         <NextImage
