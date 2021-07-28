@@ -16,6 +16,7 @@ import Layout from "../components/layout";
 import styles from "../styles/Home.module.scss";
 import { getNotificationList, INotification } from "../lib/notification";
 import useWindowScroll from "@react-hook/window-scroll";
+import { GetStaticPropsResult } from "next";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -27,9 +28,9 @@ interface HomeProps {
   notificationList: INotification[];
 }
 
-export const getStaticProps = async (): Promise<{
-  props: HomeProps;
-}> => {
+export const getStaticProps = async (): Promise<
+  GetStaticPropsResult<HomeProps>
+> => {
   return {
     props: {
       newsLinkList: await getNewsLinkList(),
@@ -40,6 +41,7 @@ export const getStaticProps = async (): Promise<{
       artistLinkList: await getArtistLinkList(),
       notificationList: await getNotificationList(),
     },
+    revalidate: 10,
   };
 };
 
