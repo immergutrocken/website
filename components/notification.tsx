@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { NotificationDisplayCategory } from "../lib/enums/notificationDisplayCategory";
 import { INotification } from "../lib/notification";
 import Content from "./block-content/content";
 import Button from "./shared/button";
@@ -38,7 +39,7 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
     }
   }, [key, hidden, notification.startDate, notification.endDate]);
 
-  return (
+  const buildFooterNotification = (): JSX.Element => (
     <div className={`bg-white p-3 ${hidden ? "hidden" : ""}`}>
       <div className="text-3xl sm:text-6xl">{notification.title}</div>
       <div className="font-content">
@@ -57,6 +58,12 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
       </div>
     </div>
   );
+
+  const buildPopupNotification = (): JSX.Element => <div></div>;
+
+  if (notification.display === NotificationDisplayCategory.FOOTER)
+    return buildFooterNotification();
+  else return buildPopupNotification();
 };
 
 export default Notification;

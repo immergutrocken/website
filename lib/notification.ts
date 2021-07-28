@@ -1,9 +1,10 @@
+import { NotificationDisplayCategory } from "./enums/notificationDisplayCategory";
 import sanityClient from "./shared/sanityClient";
 
 export interface INotification {
   title: string;
   content: [];
-  display: string;
+  display: NotificationDisplayCategory;
   startDate: Date;
   endDate: Date;
 }
@@ -12,7 +13,8 @@ export const getNotificationList = async (): Promise<INotification[]> => {
   const query = `*[_type == "notification"]{
     "title": languages.de.title,
     startDate,
-    endDate, 
+    endDate,
+    "display": displayCategory,
     "content": languages.de.content[]{..., asset->{..., "_key": _id}, markDefs[]{
       ...,
       _type == "internalLink" => {
