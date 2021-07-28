@@ -12,7 +12,7 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
   const [hidden, setHidden] = useState(false);
 
   const key =
-    "ig-notification-" + notification.title.toLowerCase().replace(" ", "-");
+    "ig-notification-" + notification.title.toLowerCase().replace(/\s/g, "-");
   const notAccepted = "not-accepted";
   const accepted = "accepted";
 
@@ -59,7 +59,31 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
     </div>
   );
 
-  const buildPopupNotification = (): JSX.Element => <div></div>;
+  const buildPopupNotification = (): JSX.Element => (
+    <div
+      className={`fixed top-0 left-0 z-20 bg-gray-600 bg-opacity-25 w-full h-full flex justify-center ${
+        hidden ? "hidden" : ""
+      }`}
+    >
+      <div className="bg-white p-5 w-1/2 self-center">
+        <div className="text-3xl sm:text-6xl">{notification.title}</div>
+        <div className="font-content">
+          <Content content={notification.content} />
+        </div>
+        <div className="text-right">
+          <Button
+            size="small"
+            onClick={() => {
+              setHidden(true);
+              localStorage.setItem(key, accepted);
+            }}
+          >
+            Ok
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
 
   if (notification.display === NotificationDisplayCategory.FOOTER)
     return buildFooterNotification();
