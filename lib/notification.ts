@@ -10,7 +10,7 @@ export interface INotification {
 }
 
 export const getNotificationList = async (): Promise<INotification[]> => {
-  const query = `*[_type == "notification" && displayCategory == "footer"]{
+  const query = `*[_type == "notification"]{
     "title": languages.de.title,
     startDate,
     endDate,
