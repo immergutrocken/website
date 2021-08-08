@@ -16,7 +16,7 @@ const BlockExpander = (props: BlockExpanderProps): JSX.Element => {
         title={props.node.title}
         iconSize="small"
       >
-        <div className="font-content text-base sm:text-lg">
+        <div className="font-content">
           <Content content={props.node.content} />
         </div>
       </Expander>
