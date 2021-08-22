@@ -37,7 +37,7 @@ export const getStaticPaths = async (): Promise<
         slug: item.slug,
       },
     })),
-    fallback: false,
+    fallback: "blocking",
   };
 };
 
@@ -53,6 +53,7 @@ export const getStaticProps = async ({
       newsLinkList: await getNewsLinkList(),
       notificationList: await getNotificationList(),
     },
+    revalidate: 10,
   };
 };
 
