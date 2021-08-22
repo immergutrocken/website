@@ -16,8 +16,8 @@ import Layout from "../components/layout";
 import styles from "../styles/Home.module.scss";
 import { getNotificationList, INotification } from "../lib/notification";
 import useWindowScroll from "@react-hook/window-scroll";
-import { GetStaticPropsResult } from "next";
-import { useLocalization } from "../components/shared/localization";
+import { useRouter } from "next/dist/client/router";
+import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -29,18 +29,18 @@ interface HomeProps {
   notificationList: INotification[];
 }
 
-export const getStaticProps = async (): Promise<
-  GetStaticPropsResult<HomeProps>
-> => {
+export const getStaticProps = async ({
+  locale,
+}: GetStaticPropsContext): Promise<GetStaticPropsResult<HomeProps>> => {
   return {
     props: {
-      newsLinkList: await getNewsLinkList(),
+      newsLinkList: await getNewsLinkList(locale),
       sponsorList: await getPartnerList(PartnerCategory.SPONSOR),
       mediaPartnerList: await getPartnerList(PartnerCategory.MEDIA_PARTNER),
       additionalList: await getPartnerList(PartnerCategory.ADDITIONAL),
       menuItems: await getMenu(),
-      artistLinkList: await getArtistLinkList(),
-      notificationList: await getNotificationList(),
+      artistLinkList: await getArtistLinkList(locale),
+      notificationList: await getNotificationList(locale),
     },
     revalidate: 10,
   };
@@ -50,7 +50,7 @@ export default function Home(props: HomeProps): JSX.Element {
   const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const [showMenu, setShowMenu] = useState(false);
   const scroll = useWindowScroll(60);
-  const { getLocale, onToggleLocale } = useLocalization();
+  const router = useRouter();
 
   return (
     <Layout
@@ -72,12 +72,13 @@ export default function Home(props: HomeProps): JSX.Element {
         onClose={() => setShowMenu(false)}
         items={props.menuItems}
       />
-      <Bubble
-        className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl pt-3 sm:text-3xl sm:pt-4"
-        onClick={() => onToggleLocale()}
-      >
-        {getLocale()}
-      </Bubble>
+      <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
+        <a>
+          <Bubble className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl pt-3 pl-1.5 sm:text-3xl sm:pt-4 sm:pl-2.5">
+            {router.locale === "de" ? "en" : "de"}
+          </Bubble>
+        </a>
+      </NextLink>
       <div className="block sm:hidden">
         <NextImage
           src="/images/ig-website-mobile-illu.jpg"

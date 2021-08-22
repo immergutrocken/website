@@ -1,4 +1,4 @@
-import NewsLink from "next/link";
+import NextLink from "next/link";
 import styles from "../styles/layout.module.scss";
 import { INewsLink } from "../lib/news";
 import Notification from "./notification";
@@ -42,9 +42,9 @@ const Layout = ({
         {newsLinkList.map((news: INewsLink, index: number) => {
           return (
             <span key={index}>
-              <NewsLink href={`/article/${news.slug}`}>
+              <NextLink href={`/article/${news.slug}`}>
                 <a className="mx-2 sm:mx-4">{news.title}</a>
-              </NewsLink>
+              </NextLink>
               {index === newsLinkList.length - 1 ? "" : "•"}
             </span>
           );

@@ -41,15 +41,16 @@ export const getStaticPaths = async (): Promise<
 
 export const getStaticProps = async ({
   params,
+  locale,
 }: GetStaticPropsContext<ArticleParams>): Promise<
   GetStaticPropsResult<ArticleProps>
 > => {
-  const article = await getArticle(params.slug);
+  const article = await getArticle(params.slug, locale);
   return {
     props: {
       ...article,
-      newsLinkList: await getNewsLinkList(),
-      notificationList: await getNotificationList(),
+      newsLinkList: await getNewsLinkList(locale),
+      notificationList: await getNotificationList(locale),
     },
     revalidate: 10,
   };

@@ -6,7 +6,7 @@ import Link from "./shared/link";
 import NextLink from "next/link";
 import Expander from "./shared/expander";
 import styles from "../styles/menu.module.scss";
-import { useLocalization } from "./shared/localization";
+import { useRouter } from "next/dist/client/router";
 
 interface MenuProps {
   onClose: () => void;
@@ -49,7 +49,7 @@ const Menu = ({
   items = [],
 }: MenuProps): JSX.Element => {
   const displayClass = showMenu ? "block" : "hidden";
-  const { getLocale, onToggleLocale } = useLocalization();
+  const router = useRouter();
 
   return (
     <div
@@ -66,12 +66,13 @@ const Menu = ({
         ))}
       </div>
       <div className="flex justify-center">
-        <Bubble
-          className="text-xl pt-3 sm:text-3xl sm:pt-4"
-          onClick={() => onToggleLocale()}
-        >
-          {getLocale()}
-        </Bubble>
+        <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
+          <a>
+            <Bubble className="text-xl pt-3 sm:text-3xl sm:pt-4">
+              {router.locale === "de" ? "en" : "de"}
+            </Bubble>
+          </a>
+        </NextLink>
       </div>
     </div>
   );

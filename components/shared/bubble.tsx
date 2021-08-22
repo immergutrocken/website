@@ -10,7 +10,7 @@ interface BubbleProps extends IClassName {
 
 const Bubble = ({
   children,
-  onClick,
+  onClick = () => false,
   className = "",
   size = "large",
 }: BubbleProps): JSX.Element => {
@@ -20,7 +20,7 @@ const Bubble = ({
   return (
     <button
       className={`bg-black rounded-full flex justify-center items-center cursor-pointer sm:transition-transform sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-110 focus:outline-none ${className} ${sizeClasses}`}
-      onClick={onClick ? () => onClick() : () => false}
+      onClick={() => onClick()}
     >
       <span className="text-white relative min-h-full min-w-full">
         {children}

@@ -32,26 +32,37 @@ export const getStaticPaths = async (): Promise<
 > => {
   const artistLinkList = await getArtistList();
   return {
-    paths: artistLinkList.map((item) => ({
-      params: {
-        slug: item.slug,
-      },
-    })),
+    paths: artistLinkList
+      .map((item) => ({
+        params: {
+          slug: item.slug,
+        },
+        locale: "de",
+      }))
+      .concat(
+        artistLinkList.map((item) => ({
+          params: {
+            slug: item.slug,
+          },
+          locale: "en",
+        }))
+      ),
     fallback: "blocking",
   };
 };
 
 export const getStaticProps = async ({
   params,
+  locale,
 }: GetStaticPropsContext<ArtistParams>): Promise<
   GetStaticPropsResult<ArtistProps>
 > => {
-  const artist = await getArtist(params.slug);
+  const artist = await getArtist(params.slug, locale);
   return {
     props: {
       ...artist,
-      newsLinkList: await getNewsLinkList(),
-      notificationList: await getNotificationList(),
+      newsLinkList: await getNewsLinkList(locale),
+      notificationList: await getNotificationList(locale),
     },
     revalidate: 10,
   };
