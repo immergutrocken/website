@@ -4,6 +4,7 @@ import { INewsLink } from "../lib/news";
 import Notification from "./notification";
 import { INotification } from "../lib/notification";
 import { NotificationDisplayCategory } from "../lib/enums/notificationDisplayCategory";
+import { useTranslations } from "next-intl";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -11,7 +12,10 @@ interface LayoutProps {
   notifcationList: INotification[];
 }
 
-const buildDateAndLocation = (times: number): JSX.Element => {
+const buildDateAndLocation = (
+  times: number,
+  dateString: string
+): JSX.Element => {
   const tempArray = [];
   for (let index = 0; index < times; index++) {
     tempArray.push(index);
@@ -19,7 +23,7 @@ const buildDateAndLocation = (times: number): JSX.Element => {
   return (
     <>
       {tempArray.map((index) => (
-        <span key={index}>26.-28.08.2021 • Neustrelitz • </span>
+        <span key={index}>{dateString} • Neustrelitz • </span>
       ))}
     </>
   );
@@ -29,51 +33,57 @@ const Layout = ({
   children,
   newsLinkList,
   notifcationList,
-}: LayoutProps): JSX.Element => (
-  <div className="py-8 sm:py-12">
-    <header className="fixed w-full top-0 z-10 bg-white flex flex-nowrap text-lg sm:text-4xl pt-1">
-      <span className="flex items-center px-1 sm:px-2">NEUES:</span>
-      <div
-        className={
-          "flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap w-full " +
-          styles.scrollbar
-        }
-      >
-        {newsLinkList.map((news: INewsLink, index: number) => {
-          return (
-            <span key={index}>
-              <NextLink href={`/article/${news.slug}`}>
-                <a className="mx-2 sm:mx-4">{news.title}</a>
-              </NextLink>
-              {index === newsLinkList.length - 1 ? "" : "•"}
-            </span>
-          );
-        })}
+}: LayoutProps): JSX.Element => {
+  const t = useTranslations("Layout");
+
+  return (
+    <div className="py-8 sm:py-12">
+      <header className="fixed w-full top-0 z-10 bg-white flex flex-nowrap text-lg sm:text-4xl pt-1">
+        <span className="flex items-center px-1 sm:px-2">{t("news")}:</span>
+        <div
+          className={
+            "flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap w-full " +
+            styles.scrollbar
+          }
+        >
+          {newsLinkList.map((news: INewsLink, index: number) => {
+            return (
+              <span key={index}>
+                <NextLink href={`/article/${news.slug}`}>
+                  <a className="mx-2 sm:mx-4">{news.title}</a>
+                </NextLink>
+                {index === newsLinkList.length - 1 ? "" : "•"}
+              </span>
+            );
+          })}
+        </div>
+      </header>
+      {children}
+      <div className="fixed bottom-0 text-lg sm:text-4xl px-2 sm:px-0 sm:py-2 whitespace-nowrap overflow-x-hidden bg-white">
+        <div className={styles.ticker}>
+          {buildDateAndLocation(10, t("date").toString())}
+        </div>
       </div>
-    </header>
-    {children}
-    <div className="fixed bottom-0 text-lg sm:text-4xl px-2 sm:px-0 sm:py-2 whitespace-nowrap overflow-x-hidden bg-white">
-      <div className={styles.ticker}>{buildDateAndLocation(10)}</div>
-    </div>
-    <div className="fixed w-full bottom-0 z-20">
+      <div className="fixed w-full bottom-0 z-20">
+        {notifcationList
+          ?.filter(
+            (notification) =>
+              notification.display === NotificationDisplayCategory.FOOTER
+          )
+          .map((notification, index) => (
+            <Notification notification={notification} key={index} />
+          ))}
+      </div>
       {notifcationList
         ?.filter(
           (notification) =>
-            notification.display === NotificationDisplayCategory.FOOTER
+            notification.display === NotificationDisplayCategory.POP_UP
         )
         .map((notification, index) => (
-          <Notification notification={notification} key={index} />
+          <Notification notification={notification} key={index}></Notification>
         ))}
     </div>
-    {notifcationList
-      ?.filter(
-        (notification) =>
-          notification.display === NotificationDisplayCategory.POP_UP
-      )
-      .map((notification, index) => (
-        <Notification notification={notification} key={index}></Notification>
-      ))}
-  </div>
-);
+  );
+};
 
 export default Layout;

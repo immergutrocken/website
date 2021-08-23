@@ -51,7 +51,6 @@ export const getArticle = async (
     }}`;
 
   const result = (await client.fetch(query))[0];
-  console.log(result);
 
   const article = {
     ...result,

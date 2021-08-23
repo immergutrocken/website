@@ -18,6 +18,7 @@ import { getNotificationList, INotification } from "../lib/notification";
 import useWindowScroll from "@react-hook/window-scroll";
 import { useRouter } from "next/dist/client/router";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
+import { useTranslations } from "next-intl";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -27,6 +28,7 @@ interface HomeProps {
   menuItems: IMenuItem[];
   artistLinkList: IArtistLink[];
   notificationList: INotification[];
+  messages: unknown;
 }
 
 export const getStaticProps = async ({
@@ -41,8 +43,9 @@ export const getStaticProps = async ({
       menuItems: await getMenu(),
       artistLinkList: await getArtistLinkList(locale),
       notificationList: await getNotificationList(locale),
+      messages: require(`../messages/${locale}.json`),
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
 
@@ -51,6 +54,7 @@ export default function Home(props: HomeProps): JSX.Element {
   const [showMenu, setShowMenu] = useState(false);
   const scroll = useWindowScroll(60);
   const router = useRouter();
+  const t = useTranslations("Home");
 
   return (
     <Layout
@@ -58,7 +62,7 @@ export default function Home(props: HomeProps): JSX.Element {
       notifcationList={props.notificationList}
     >
       <NextHead>
-        <title>21. Immergut Festival</title>
+        <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
       <Bubble
@@ -116,7 +120,7 @@ export default function Home(props: HomeProps): JSX.Element {
           }
           size="small"
         >
-          Musik
+          {t("music").toString()}
         </Button>
         <Button
           className="mx-2"
@@ -132,7 +136,7 @@ export default function Home(props: HomeProps): JSX.Element {
           }
           size="small"
         >
-          Lesung
+          {t("readings").toString()}
         </Button>
       </div>
       <div className="mt-4 sm:mt-6 text-4xl sm:text-6xl text-center flex flex-row flex-wrap justify-center">

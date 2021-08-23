@@ -1,0 +1,24 @@
+{
+  "Layout": {
+    "news": "News",
+    "date": "2021/08/26 - 28"
+  },
+  "Footer": {
+    "newsletter": "Newsletter Registration",
+    "your-email-address": "Your e-mail address",
+    "sponsors": "Sponsors",
+    "media-partners": "Media Partners",
+    "supported-by": "Supported by",
+    "disclaimer": "The Immergutrocken e.V. as the organizer reserves the right to make changes to the program. The house rules as shown on the notice apply on the event area."
+  },
+  "Home": {
+    "music": "Music",
+    "readings": "Readings",
+    "festival": "21th Immergut Festival"
+  },
+  "Article": {
+    "photo": "Photo",
+    "text": "Text",
+    "festival": "21th Immergut Festival"
+  }
+}
