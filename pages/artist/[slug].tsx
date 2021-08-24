@@ -17,6 +17,7 @@ import styles from "../../styles/detail.module.scss";
 import NextHead from "next/head";
 import { getNotificationList, INotification } from "../../lib/notification";
 import Content from "../../components/block-content/content";
+import { useTranslations } from "next-intl";
 
 interface ArtistParams extends ParsedUrlQuery {
   slug: string;
@@ -25,6 +26,7 @@ interface ArtistParams extends ParsedUrlQuery {
 interface ArtistProps extends IArtist {
   newsLinkList: INewsLink[];
   notificationList: INotification[];
+  messages: unknown;
 }
 
 export const getStaticPaths = async (): Promise<
@@ -32,28 +34,40 @@ export const getStaticPaths = async (): Promise<
 > => {
   const artistLinkList = await getArtistList();
   return {
-    paths: artistLinkList.map((item) => ({
-      params: {
-        slug: item.slug,
-      },
-    })),
+    paths: artistLinkList
+      .map((item) => ({
+        params: {
+          slug: item.slug,
+        },
+        locale: "de",
+      }))
+      .concat(
+        artistLinkList.map((item) => ({
+          params: {
+            slug: item.slug,
+          },
+          locale: "en",
+        }))
+      ),
     fallback: "blocking",
   };
 };
 
 export const getStaticProps = async ({
   params,
+  locale,
 }: GetStaticPropsContext<ArtistParams>): Promise<
   GetStaticPropsResult<ArtistProps>
 > => {
-  const artist = await getArtist(params.slug);
+  const artist = await getArtist(params.slug, locale);
   return {
     props: {
       ...artist,
-      newsLinkList: await getNewsLinkList(),
-      notificationList: await getNotificationList(),
+      newsLinkList: await getNewsLinkList(locale),
+      notificationList: await getNotificationList(locale),
+      messages: require(`../../messages/${locale}.json`),
     },
-    revalidate: 10,
+    revalidate: 1,
   };
 };
 
@@ -78,10 +92,12 @@ const Artist = ({
   content,
   notificationList,
 }: ArtistProps): JSX.Element => {
+  const t = useTranslations("Article");
+
   return (
     <Layout newsLinkList={newsLinkList} notifcationList={notificationList}>
       <NextHead>
-        <title>{`${title} - 21. Immergut Festival`}</title>
+        <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>
       <NextLink href="/">
         <a className="fixed top-10 sm:top-14 right-2 sm:right-5 z-10">
@@ -108,11 +124,11 @@ const Artist = ({
         <div className="py-5 px-4">
           <h1 className="text-4xl sm:text-7xl sm:text-center">{title}</h1>
           <div className="flex flex-row space-x-4 mt-5 sm:mt-8 sm:justify-center sm:text-3xl">
-            <Label>Foto</Label>
+            <Label>{t("photo").toString()}</Label>
             <span>{banner.credits}</span>
           </div>
           <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:justify-center sm:text-3xl">
-            <Label>Text</Label>
+            <Label>{t("text").toString()}</Label>
             <span>{author}</span>
           </div>
           <div className="flex flex-row flex-wrap mt-3 sm:mt-6 sm:justify-center">

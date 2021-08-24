@@ -1,3 +1,4 @@
+import groq from "groq";
 import { MenuItemType } from "./enums/menuItemType.enum";
 import client from "./shared/sanityClient";
 
@@ -85,7 +86,16 @@ const buildMenuItems = (
 };
 
 export const getMenu = async (): Promise<IMenuItem[]> => {
-  const query = `*[_type == 'menu'] {isMainMenu, menuEntries, displayName, _id, 'menuEntryRefs': menuEntries[].reference->{_id, _type, slug}}`;
+  const query = groq`
+  *
+  [_type == 'menu']
+  {
+    isMainMenu,
+    menuEntries,
+    displayName,
+    _id,
+    'menuEntryRefs': menuEntries[].reference->{_id, _type, slug}
+  }`;
   const data = await client.fetch(query);
   const mainMenu = data.find((menu: ISanityMenu) => menu.isMainMenu === true);
   const menuItems = buildMenuItems(mainMenu, data);

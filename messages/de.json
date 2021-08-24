@@ -1,0 +1,24 @@
+{
+  "Layout": {
+    "news": "Neues",
+    "date": "26.-28.08.2021"
+  },
+  "Footer": {
+    "newsletter": "Rundschreiben",
+    "your-email-address": "Deine E-Mail-Adresse",
+    "sponsors": "Sponsor*innen",
+    "media-partners": "Medienpartner*innen",
+    "supported-by": "Gefördert von",
+    "disclaimer": "Programmänderungen bleiben dem Immergutrocken e.V. als Veranstalter vorbehalten. Auf der Veranstaltungsfläche gilt die Hausordnung laut Aushang."
+  },
+  "Home": {
+    "music": "Musik",
+    "readings": "Lesungen",
+    "festival": "21. Immergut Festival"
+  },
+  "Article": {
+    "photo": "Foto",
+    "text": "Text",
+    "festival": "21. Immergut Festival"
+  }
+}

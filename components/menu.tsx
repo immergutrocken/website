@@ -6,6 +6,7 @@ import Link from "./shared/link";
 import NextLink from "next/link";
 import Expander from "./shared/expander";
 import styles from "../styles/menu.module.scss";
+import { useRouter } from "next/dist/client/router";
 
 interface MenuProps {
   onClose: () => void;
@@ -48,6 +49,8 @@ const Menu = ({
   items = [],
 }: MenuProps): JSX.Element => {
   const displayClass = showMenu ? "block" : "hidden";
+  const router = useRouter();
+
   return (
     <div
       className={`w-full px-2 overflow-y-auto sm:w-1/2 bg-white fixed z-20 top-8 sm:top-11 left-0 ${styles.contentHeight} ${displayClass}`}
@@ -61,6 +64,15 @@ const Menu = ({
             {buildMenuItem(item)}
           </div>
         ))}
+      </div>
+      <div className="flex justify-center">
+        <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
+          <a>
+            <Bubble className="text-xl pt-3 sm:text-3xl sm:pt-4">
+              {router.locale === "de" ? "en" : "de"}
+            </Bubble>
+          </a>
+        </NextLink>
       </div>
     </div>
   );
