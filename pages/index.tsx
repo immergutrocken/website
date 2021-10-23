@@ -13,9 +13,7 @@ import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Bubble from "../components/shared/bubble";
 import Menu from "../components/menu";
 import Layout from "../components/layout";
-import styles from "../styles/Home.module.scss";
 import { getNotificationList, INotification } from "../lib/notification";
-import useWindowScroll from "@react-hook/window-scroll";
 import { useRouter } from "next/dist/client/router";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
@@ -52,7 +50,6 @@ export const getStaticProps = async ({
 export default function Home(props: HomeProps): JSX.Element {
   const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const [showMenu, setShowMenu] = useState(false);
-  const scroll = useWindowScroll(60);
   const router = useRouter();
   const t = useTranslations("Home");
 
@@ -85,25 +82,19 @@ export default function Home(props: HomeProps): JSX.Element {
       </NextLink>
       <div className="block sm:hidden">
         <NextImage
-          src="/images/ig-website-mobile-illu.jpg"
-          width="320"
-          height="455"
+          src="/images/ig-website-mobile-cd.png"
+          width="1080"
+          height="1534"
           layout="responsive"
         />
       </div>
       <div className="hidden sm:block">
         <NextImage
-          src="/images/ig-website-desktop-illu2.jpg"
-          width="1440"
-          height="587"
+          src="/images/ig-website-desktop-cd.png"
+          width="3280"
+          height="1336"
           layout="responsive"
         />
-      </div>
-      <div
-        className={`absolute ${styles.logo}`}
-        style={{ transform: `rotate(${scroll}deg)` }}
-      >
-        <NextImage src="/images/ig-motto-logo1.svg" layout="fill" />
       </div>
       <div className="mt-4 sm:mt-6 text-center">
         <Button
