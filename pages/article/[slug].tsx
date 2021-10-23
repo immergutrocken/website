@@ -10,7 +10,6 @@ import NextLink from "next/link";
 import Label from "../../components/shared/label";
 import Bubble from "../../components/shared/bubble";
 import NextImage from "next/image";
-import styles from "../../styles/detail.module.scss";
 import NextHead from "next/head";
 import Content from "../../components/block-content/content";
 import { getNotificationList, INotification } from "../../lib/notification";
@@ -78,7 +77,7 @@ const Article = ({
         </a>
       </NextLink>
       <div className="grid grid-cols-1 h-full sm:grid-cols-2 sm:space-x-5">
-        <div className={`relative sm:sticky sm:top-12 ${styles.contentHeight}`}>
+        <div className={`relative sm:sticky sm:top-12`}>
           <NextImage
             src={banner.urlWithBlur}
             layout="fill"
@@ -93,14 +92,14 @@ const Article = ({
           />
         </div>
         <div className="py-5 px-4">
-          <h1 className="text-4xl sm:text-7xl">{title}</h1>
+          <h1 className="text-4xl sm:text-7xl font-important">{title}</h1>
           <div className="flex flex-row space-x-4 mt-5 sm:mt-8 sm:text-3xl">
             <Label>{t("photo").toString()}</Label>
-            <span>{banner.credits}</span>
+            <span className="font-important">{banner.credits}</span>
           </div>
           <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:text-3xl">
             <Label>{t("text").toString()}</Label>
-            <span>{author}</span>
+            <span className="font-important">{author}</span>
           </div>
           <div className="mt-5 font-content">
             <Content content={content} />

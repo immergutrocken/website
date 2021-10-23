@@ -53,7 +53,7 @@ const Menu = ({
 
   return (
     <div
-      className={`w-full px-2 overflow-y-auto sm:w-1/2 bg-white fixed z-20 top-8 sm:top-11 left-0 ${styles.contentHeight} ${displayClass}`}
+      className={`w-full px-2 overflow-y-auto sm:w-1/2 bg-white fixed z-20 left-0 h-full font-important ${displayClass}`}
     >
       <Bubble className="absolute top-3 right-3" onClick={() => onClose()}>
         <NextImage src="/close.svg" layout="fill" objectFit="contain" />
@@ -68,7 +68,7 @@ const Menu = ({
       <div className="flex justify-center">
         <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
           <a>
-            <Bubble className="text-xl pt-3 sm:text-3xl sm:pt-4">
+            <Bubble className="text-xl pt-2 sm:text-3xl sm:pt-3 font-important">
               {router.locale === "de" ? "en" : "de"}
             </Bubble>
           </a>

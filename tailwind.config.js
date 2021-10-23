@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {},
     fontFamily: {
-      content: ["Libre Baskerville"],
-      milona: ["Milona"],
+      content: ["Ludwig-Normal"],
+      important: ["Ludwig-Bold"],
     },
   },
   variants: {

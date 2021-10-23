@@ -22,7 +22,7 @@ const Footer = ({
 
   return (
     <>
-      <div className="mt-12 sm:mt-20">
+      <div className="mt-8 sm:mt-12">
         <NewsletterRegistration />
       </div>
       <div className="flex flex-row mt-4 justify-center flex-wrap">

@@ -73,7 +73,7 @@ export default function Home(props: HomeProps): JSX.Element {
       />
       <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
         <a>
-          <Bubble className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl pt-3 pl-1.5 sm:text-3xl sm:pt-4 sm:pl-2.5">
+          <Bubble className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl sm:text-3xl font-important">
             {router.locale === "de" ? "en" : "de"}
           </Bubble>
         </a>
@@ -131,7 +131,7 @@ export default function Home(props: HomeProps): JSX.Element {
       <div className="mt-4 sm:mt-6 text-3xl text-center">
         <Label>{t("news")}</Label>
       </div>
-      <div className="mt-4 sm:mt-6 text-4xl sm:text-6xl text-center flex flex-row flex-wrap justify-center">
+      <div className="mt-4 sm:mt-6 text-3xl sm:text-5xl text-center flex flex-row flex-wrap justify-center font-important">
         {props.newsLinkList.map((news: INewsLink, index: number) => {
           return (
             <span key={index}>

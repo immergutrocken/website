@@ -12,7 +12,6 @@ import Bubble from "../../components/shared/bubble";
 import Link from "../../components/shared/link";
 import { SocialMedia } from "../../lib/enums/socialMedia.enum";
 import NextLink from "next/link";
-import styles from "../../styles/detail.module.scss";
 import NextHead from "next/head";
 import { getNotificationList, INotification } from "../../lib/notification";
 import Content from "../../components/block-content/content";
@@ -103,7 +102,7 @@ const Artist = ({
         </a>
       </NextLink>
       <div className="grid grid-cols-1 h-full sm:grid-cols-2 sm:space-x-5">
-        <div className={`relative sm:sticky sm:top-12 ${styles.contentHeight}`}>
+        <div className={`relative sm:sticky sm:top-12`}>
           <NextImage
             src={banner.urlWithBlur}
             layout="fill"
@@ -121,11 +120,11 @@ const Artist = ({
           <h1 className="text-4xl sm:text-7xl sm:text-center">{title}</h1>
           <div className="flex flex-row space-x-4 mt-5 sm:mt-8 sm:justify-center sm:text-3xl">
             <Label>{t("photo").toString()}</Label>
-            <span>{banner.credits}</span>
+            <span className="font-important">{banner.credits}</span>
           </div>
           <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:justify-center sm:text-3xl">
             <Label>{t("text").toString()}</Label>
-            <span>{author}</span>
+            <span className="font-important">{author}</span>
           </div>
           <div className="flex flex-row flex-wrap mt-3 sm:mt-6 sm:justify-center">
             {socialMedia.map((element, index) => (
