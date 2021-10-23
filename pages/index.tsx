@@ -57,10 +57,7 @@ export default function Home(props: HomeProps): JSX.Element {
   const t = useTranslations("Home");
 
   return (
-    <Layout
-      newsLinkList={props.newsLinkList}
-      notifcationList={props.notificationList}
-    >
+    <Layout notifcationList={props.notificationList}>
       <NextHead>
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
