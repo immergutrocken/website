@@ -16,6 +16,8 @@ import NextHead from "next/head";
 import { getNotificationList, INotification } from "../../lib/notification";
 import Content from "../../components/block-content/content";
 import { useTranslations } from "next-intl";
+import { getPartnerList, IPartner } from "../../lib/partner";
+import PartnerCategory from "../../lib/enums/partnerCategory.enum";
 
 interface ArtistParams extends ParsedUrlQuery {
   slug: string;
@@ -23,6 +25,9 @@ interface ArtistParams extends ParsedUrlQuery {
 
 interface ArtistProps extends IArtist {
   notificationList: INotification[];
+  sponsorList: IPartner[];
+  mediaPartnerList: IPartner[];
+  additionalList: IPartner[];
   messages: unknown;
 }
 
@@ -61,6 +66,9 @@ export const getStaticProps = async ({
     props: {
       ...artist,
       notificationList: await getNotificationList(locale),
+      sponsorList: await getPartnerList(PartnerCategory.SPONSOR),
+      mediaPartnerList: await getPartnerList(PartnerCategory.MEDIA_PARTNER),
+      additionalList: await getPartnerList(PartnerCategory.ADDITIONAL),
       messages: require(`../../messages/${locale}.json`),
     },
     revalidate: 1,
@@ -86,11 +94,19 @@ const Artist = ({
   socialMedia,
   content,
   notificationList,
+  sponsorList,
+  mediaPartnerList,
+  additionalList,
 }: ArtistProps): JSX.Element => {
   const t = useTranslations("Article");
 
   return (
-    <Layout notifcationList={notificationList}>
+    <Layout
+      notifcationList={notificationList}
+      sponsorList={sponsorList}
+      mediaPartnerList={mediaPartnerList}
+      additionalList={additionalList}
+    >
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>

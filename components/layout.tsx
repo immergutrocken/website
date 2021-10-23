@@ -1,16 +1,32 @@
 import Notification from "./notification";
 import { INotification } from "../lib/notification";
 import { NotificationDisplayCategory } from "../lib/enums/notificationDisplayCategory";
+import Footer from "./footer";
+import { IPartner } from "../lib/partner";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[] | string;
   notifcationList: INotification[];
+  sponsorList: IPartner[];
+  mediaPartnerList: IPartner[];
+  additionalList: IPartner[];
 }
 
-const Layout = ({ children, notifcationList }: LayoutProps): JSX.Element => {
+const Layout = ({
+  children,
+  notifcationList,
+  sponsorList,
+  mediaPartnerList,
+  additionalList,
+}: LayoutProps): JSX.Element => {
   return (
     <div>
       {children}
+      <Footer
+        sponsorList={sponsorList}
+        mediaPartnerList={mediaPartnerList}
+        additionalList={additionalList}
+      />
       <div className="fixed w-full bottom-0 z-20">
         {notifcationList
           ?.filter(

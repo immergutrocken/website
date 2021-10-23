@@ -14,6 +14,8 @@ import NextHead from "next/head";
 import Content from "../../components/block-content/content";
 import { getNotificationList, INotification } from "../../lib/notification";
 import { useTranslations } from "next-intl";
+import { getPartnerList, IPartner } from "../../lib/partner";
+import PartnerCategory from "../../lib/enums/partnerCategory.enum";
 
 interface ArticleParams extends ParsedUrlQuery {
   slug: string;
@@ -21,6 +23,9 @@ interface ArticleParams extends ParsedUrlQuery {
 
 interface ArticleProps extends IArticle {
   notificationList: INotification[];
+  sponsorList: IPartner[];
+  mediaPartnerList: IPartner[];
+  additionalList: IPartner[];
   messages: unknown;
 }
 
@@ -49,6 +54,9 @@ export const getStaticProps = async ({
     props: {
       ...article,
       notificationList: await getNotificationList(locale),
+      sponsorList: await getPartnerList(PartnerCategory.SPONSOR),
+      mediaPartnerList: await getPartnerList(PartnerCategory.MEDIA_PARTNER),
+      additionalList: await getPartnerList(PartnerCategory.ADDITIONAL),
       messages: require(`../../messages/${locale}.json`),
     },
     revalidate: 1,
@@ -61,11 +69,19 @@ const Article = ({
   content,
   author,
   notificationList,
+  sponsorList,
+  mediaPartnerList,
+  additionalList,
 }: ArticleProps): JSX.Element => {
   const t = useTranslations("Article");
 
   return (
-    <Layout notifcationList={notificationList}>
+    <Layout
+      notifcationList={notificationList}
+      sponsorList={sponsorList}
+      mediaPartnerList={mediaPartnerList}
+      additionalList={additionalList}
+    >
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>
@@ -77,7 +93,7 @@ const Article = ({
         </a>
       </NextLink>
       <div className="grid grid-cols-1 h-full sm:grid-cols-2 sm:space-x-5">
-        <div className={`relative sm:sticky sm:top-12`}>
+        <div className={`relative sm:sticky sm:top-12 h-72 sm:h-full`}>
           <NextImage
             src={banner.urlWithBlur}
             layout="fill"

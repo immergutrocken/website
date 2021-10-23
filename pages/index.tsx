@@ -1,6 +1,5 @@
 import NextHead from "next/head";
 import NextImage from "next/image";
-import Footer from "../components/footer";
 import { getNewsLinkList, INewsLink } from "../lib/news";
 import { getPartnerList, IPartner } from "../lib/partner";
 import PartnerCategory from "../lib/enums/partnerCategory.enum";
@@ -55,7 +54,12 @@ export default function Home(props: HomeProps): JSX.Element {
   const t = useTranslations("Home");
 
   return (
-    <Layout notifcationList={props.notificationList}>
+    <Layout
+      notifcationList={props.notificationList}
+      sponsorList={props.sponsorList}
+      mediaPartnerList={props.mediaPartnerList}
+      additionalList={props.additionalList}
+    >
       <NextHead>
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
@@ -155,11 +159,6 @@ export default function Home(props: HomeProps): JSX.Element {
             </span>
           ))} */}
       </div>
-      <Footer
-        sponsorList={props.sponsorList}
-        mediaPartnerList={props.mediaPartnerList}
-        additionalList={props.additionalList}
-      />
     </Layout>
   );
 }
