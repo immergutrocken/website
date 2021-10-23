@@ -22,7 +22,7 @@ const Button = ({
       active ? "bg-black" : "bg-gray-200"
     } ${disabled ? "cursor-not-allowed" : "cursor-pointer"} ${
       size === "small"
-        ? "px-2.5 sm:px-4 text-base sm:text-xl h-8 sm:h-14"
+        ? "px-2.5 sm:px-4 text-base sm:text-xl h-6 sm:h-10"
         : "px-2.5 sm:px-4 text-lg sm:text-4xl h-8 sm:h-14"
     } ${success ? "bg-green-500" : ""}`}
     onClick={() => (onClick ? onClick() : {})}

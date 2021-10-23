@@ -41,7 +41,9 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
 
   const buildFooterNotification = (): JSX.Element => (
     <div className={`bg-white p-3 ${hidden ? "hidden" : ""}`}>
-      <div className="text-3xl sm:text-6xl">{notification.title}</div>
+      <div className="text-3xl sm:text-6xl font-important">
+        {notification.title}
+      </div>
       <div className="font-content">
         <Content content={notification.content} />
       </div>
