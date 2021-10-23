@@ -6,7 +6,6 @@ import {
 import { ParsedUrlQuery } from "querystring";
 import Layout from "../../components/layout";
 import { getArtist, getArtistList, IArtist } from "../../lib/artist";
-import { getNewsLinkList, INewsLink } from "../../lib/news";
 import NextImage from "next/image";
 import Label from "../../components/shared/label";
 import Bubble from "../../components/shared/bubble";
@@ -24,7 +23,6 @@ interface ArtistParams extends ParsedUrlQuery {
 }
 
 interface ArtistProps extends IArtist {
-  newsLinkList: INewsLink[];
   notificationList: INotification[];
   messages: unknown;
 }
@@ -63,7 +61,6 @@ export const getStaticProps = async ({
   return {
     props: {
       ...artist,
-      newsLinkList: await getNewsLinkList(locale),
       notificationList: await getNotificationList(locale),
       messages: require(`../../messages/${locale}.json`),
     },
@@ -85,7 +82,6 @@ const imageMapping = new Map<SocialMedia, string>([
 
 const Artist = ({
   title,
-  newsLinkList,
   banner,
   author,
   socialMedia,
@@ -95,7 +91,7 @@ const Artist = ({
   const t = useTranslations("Article");
 
   return (
-    <Layout newsLinkList={newsLinkList} notifcationList={notificationList}>
+    <Layout notifcationList={notificationList}>
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>

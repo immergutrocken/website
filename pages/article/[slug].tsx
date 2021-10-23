@@ -5,7 +5,6 @@ import {
 } from "next";
 import { ParsedUrlQuery } from "querystring";
 import { getArticle, getArticleSlugList, IArticle } from "../../lib/article";
-import { getNewsLinkList, INewsLink } from "../../lib/news";
 import Layout from "../../components/layout";
 import NextLink from "next/link";
 import Label from "../../components/shared/label";
@@ -22,7 +21,6 @@ interface ArticleParams extends ParsedUrlQuery {
 }
 
 interface ArticleProps extends IArticle {
-  newsLinkList: INewsLink[];
   notificationList: INotification[];
   messages: unknown;
 }
@@ -51,7 +49,6 @@ export const getStaticProps = async ({
   return {
     props: {
       ...article,
-      newsLinkList: await getNewsLinkList(locale),
       notificationList: await getNotificationList(locale),
       messages: require(`../../messages/${locale}.json`),
     },
@@ -61,7 +58,6 @@ export const getStaticProps = async ({
 
 const Article = ({
   title,
-  newsLinkList,
   banner,
   content,
   author,
@@ -70,7 +66,7 @@ const Article = ({
   const t = useTranslations("Article");
 
   return (
-    <Layout newsLinkList={newsLinkList} notifcationList={notificationList}>
+    <Layout notifcationList={notificationList}>
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>
