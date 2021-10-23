@@ -7,9 +7,9 @@ import PartnerCategory from "../lib/enums/partnerCategory.enum";
 import { getMenu, IMenuItem } from "../lib/menu";
 import { getArtistLinkList, IArtistLink } from "../lib/artist";
 import NextLink from "next/link";
-import Button from "../components/shared/button";
+// import Button from "../components/shared/button";
 import { useState } from "react";
-import { ArtistCategory } from "../lib/enums/artistCategory.enum";
+// import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Bubble from "../components/shared/bubble";
 import Menu from "../components/menu";
 import Layout from "../components/layout";
@@ -17,6 +17,7 @@ import { getNotificationList, INotification } from "../lib/notification";
 import { useRouter } from "next/dist/client/router";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
+import Label from "../components/shared/label";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -48,7 +49,7 @@ export const getStaticProps = async ({
 };
 
 export default function Home(props: HomeProps): JSX.Element {
-  const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
+  // const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const t = useTranslations("Home");
@@ -93,7 +94,7 @@ export default function Home(props: HomeProps): JSX.Element {
           layout="responsive"
         />
       </div>
-      <div className="mt-4 sm:mt-6 text-center">
+      {/* <div className="mt-4 sm:mt-6 text-center">
         <Button
           className="mx-2"
           onClick={() =>
@@ -126,9 +127,22 @@ export default function Home(props: HomeProps): JSX.Element {
         >
           {t("readings").toString()}
         </Button>
+      </div> */}
+      <div className="mt-4 sm:mt-6 text-3xl text-center">
+        <Label>{t("news")}</Label>
       </div>
       <div className="mt-4 sm:mt-6 text-4xl sm:text-6xl text-center flex flex-row flex-wrap justify-center">
-        {props.artistLinkList
+        {props.newsLinkList.map((news: INewsLink, index: number) => {
+          return (
+            <span key={index}>
+              <NextLink href={`/article/${news.slug}`}>
+                <a className="mx-2 sm:mx-4">{news.title}</a>
+              </NextLink>
+              {index === props.newsLinkList.length - 1 ? "" : "•"}
+            </span>
+          );
+        })}
+        {/* {props.artistLinkList
           .filter((link) =>
             filterCategory === null ? true : link.category === filterCategory
           )
@@ -139,7 +153,7 @@ export default function Home(props: HomeProps): JSX.Element {
               </NextLink>
               {index === array.length - 1 ? "" : "•"}
             </span>
-          ))}
+          ))} */}
       </div>
       <Footer
         sponsorList={props.sponsorList}

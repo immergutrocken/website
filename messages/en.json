@@ -1,8 +1,4 @@
 {
-  "Layout": {
-    "news": "News",
-    "date": "2021/08/26 - 28"
-  },
   "Footer": {
     "newsletter": "Newsletter Registration",
     "your-email-address": "Your e-mail address",
@@ -14,7 +10,8 @@
   "Home": {
     "music": "Music",
     "readings": "Readings",
-    "festival": "21st Immergut Festival"
+    "festival": "21st Immergut Festival",
+    "news": "News"
   },
   "Article": {
     "photo": "Photo",
