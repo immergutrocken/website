@@ -24,12 +24,14 @@ interface ContentProps {
 }
 
 const Content = ({ content }: ContentProps): JSX.Element => (
-  <BlockContent
-    blocks={content}
-    serializers={serializers}
-    projectId={process.env.SANITY_PROJECT_ID}
-    dataset={process.env.SANITY_DATASET}
-  />
+  <div className="font-content text-base sm:text-lg">
+    <BlockContent
+      blocks={content}
+      serializers={serializers}
+      projectId={process.env.SANITY_PROJECT_ID}
+      dataset={process.env.SANITY_DATASET}
+    />
+  </div>
 );
 
 export default Content;
