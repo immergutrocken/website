@@ -3,6 +3,11 @@ import { INotification } from "../lib/notification";
 import { NotificationDisplayCategory } from "../lib/enums/notificationDisplayCategory";
 import Footer from "./footer";
 import { IPartner } from "../lib/partner";
+import React, { useState } from "react";
+import Menu from "./menu";
+import Bubble from "./shared/bubble";
+import NextImage from "next/image";
+import { IMenuItem } from "../lib/menu";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -10,6 +15,7 @@ interface LayoutProps {
   sponsorList: IPartner[];
   mediaPartnerList: IPartner[];
   additionalList: IPartner[];
+  menuItems: IMenuItem[];
 }
 
 const Layout = ({
@@ -18,9 +24,23 @@ const Layout = ({
   sponsorList,
   mediaPartnerList,
   additionalList,
+  menuItems,
 }: LayoutProps): JSX.Element => {
+  const [showMenu, setShowMenu] = useState(false);
+
   return (
     <div>
+      <Bubble
+        className="fixed left-2 top-2 sm:left-4 sm:top-4 z-10"
+        onClick={() => setShowMenu(true)}
+      >
+        <NextImage src="/burger-menu.svg" layout="fill" objectFit="contain" />
+      </Bubble>
+      <Menu
+        showMenu={showMenu}
+        onClose={() => setShowMenu(false)}
+        items={menuItems}
+      />
       {children}
       <Footer
         sponsorList={sponsorList}

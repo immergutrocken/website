@@ -3,6 +3,7 @@ interface LinkProps {
   title?: string;
   href: string;
   className?: string;
+  click?: () => void;
 }
 
 const Link = ({
@@ -10,6 +11,7 @@ const Link = ({
   title,
   href,
   className = "",
+  click,
 }: LinkProps): JSX.Element => (
   <a
     href={href}
@@ -17,6 +19,7 @@ const Link = ({
     rel="noreferrer"
     className={`hover:underline focus:outline-none ${className}`}
     title={title}
+    onClick={() => click()}
   >
     {children}
   </a>

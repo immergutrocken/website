@@ -6,9 +6,7 @@ import {
 import { ParsedUrlQuery } from "querystring";
 import { getArticle, getArticleSlugList, IArticle } from "../../lib/article";
 import Layout from "../../components/layout";
-import NextLink from "next/link";
 import Label from "../../components/shared/label";
-import Bubble from "../../components/shared/bubble";
 import NextImage from "next/image";
 import NextHead from "next/head";
 import Content from "../../components/block-content/content";
@@ -16,6 +14,7 @@ import { getNotificationList, INotification } from "../../lib/notification";
 import { useTranslations } from "next-intl";
 import { getPartnerList, IPartner } from "../../lib/partner";
 import PartnerCategory from "../../lib/enums/partnerCategory.enum";
+import { getMenu, IMenuItem } from "../../lib/menu";
 
 interface ArticleParams extends ParsedUrlQuery {
   slug: string;
@@ -26,6 +25,7 @@ interface ArticleProps extends IArticle {
   sponsorList: IPartner[];
   mediaPartnerList: IPartner[];
   additionalList: IPartner[];
+  menuItems: IMenuItem[];
   messages: unknown;
 }
 
@@ -57,6 +57,7 @@ export const getStaticProps = async ({
       sponsorList: await getPartnerList(PartnerCategory.SPONSOR),
       mediaPartnerList: await getPartnerList(PartnerCategory.MEDIA_PARTNER),
       additionalList: await getPartnerList(PartnerCategory.ADDITIONAL),
+      menuItems: await getMenu(),
       messages: require(`../../messages/${locale}.json`),
     },
     revalidate: 1,
@@ -72,6 +73,7 @@ const Article = ({
   sponsorList,
   mediaPartnerList,
   additionalList,
+  menuItems,
 }: ArticleProps): JSX.Element => {
   const t = useTranslations("Article");
 
@@ -81,19 +83,15 @@ const Article = ({
       sponsorList={sponsorList}
       mediaPartnerList={mediaPartnerList}
       additionalList={additionalList}
+      menuItems={menuItems}
     >
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>
-      <NextLink href="/">
-        <a className="fixed top-10 sm:top-14 right-2 sm:right-5 z-10">
-          <Bubble>
-            <NextImage src="/close.svg" layout="fill" objectFit="contain" />
-          </Bubble>
-        </a>
-      </NextLink>
       <div className="grid grid-cols-1 h-full sm:grid-cols-2 sm:space-x-5">
-        <div className={`relative sm:sticky sm:top-12 h-72 sm:h-full`}>
+        <div
+          className={`relative sm:sticky sm:top-0 h-72 sm:max-h-screen sm:h-full`}
+        >
           <NextImage
             src={banner.urlWithBlur}
             layout="fill"

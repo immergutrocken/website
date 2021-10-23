@@ -14,10 +14,14 @@ interface MenuProps {
   items: IMenuItem[];
 }
 
-const buildMenuItem = (item: IMenuItem): JSX.Element => {
+const buildMenuItem = (item: IMenuItem, onClose: () => void): JSX.Element => {
   switch (item.type) {
     case MenuItemType.EXTERNAL_LINK:
-      return <Link href={item.url}>{item.title.de}</Link>;
+      return (
+        <Link href={item.url} click={() => onClose()}>
+          {item.title.de}
+        </Link>
+      );
     case MenuItemType.INTERNAL_LINK:
       return (
         <NextLink
@@ -25,7 +29,8 @@ const buildMenuItem = (item: IMenuItem): JSX.Element => {
             item.url != null ? item.url : `/${item.documentType}/${item.slug}`
           }
         >
-          <a>{item.title.de}</a>
+          {/* eslint-disable-next-line */}
+          <a onClick={() => onClose()}>{item.title.de}</a>
         </NextLink>
       );
     case MenuItemType.SUBMENU:
@@ -33,7 +38,7 @@ const buildMenuItem = (item: IMenuItem): JSX.Element => {
         <Expander title={item.title.de}>
           {item.submenuItems.map((subMenuItem, index) => (
             <div className={`text-white ${styles.textStroke}`} key={index}>
-              {buildMenuItem(subMenuItem)}
+              {buildMenuItem(subMenuItem, onClose)}
             </div>
           ))}
         </Expander>
@@ -61,14 +66,20 @@ const Menu = ({
       <div className="mt-16 sm:mt-24">
         {items.map((item, index) => (
           <div className="text-center text-3xl sm:text-6xl" key={index}>
-            {buildMenuItem(item)}
+            {buildMenuItem(item, onClose)}
           </div>
         ))}
       </div>
       <div className="flex justify-center">
-        <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
+        <NextLink
+          href={router.asPath}
+          locale={router.locale === "de" ? "en" : "de"}
+        >
           <a>
-            <Bubble className="text-xl pt-2 sm:text-3xl sm:pt-3 font-important">
+            <Bubble
+              className="text-xl pt-2 sm:text-3xl sm:pt-3 font-important"
+              onClick={() => onClose()}
+            >
               {router.locale === "de" ? "en" : "de"}
             </Bubble>
           </a>

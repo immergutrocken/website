@@ -7,10 +7,8 @@ import { getMenu, IMenuItem } from "../lib/menu";
 import { getArtistLinkList, IArtistLink } from "../lib/artist";
 import NextLink from "next/link";
 // import Button from "../components/shared/button";
-import { useState } from "react";
 // import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Bubble from "../components/shared/bubble";
-import Menu from "../components/menu";
 import Layout from "../components/layout";
 import { getNotificationList, INotification } from "../lib/notification";
 import { useRouter } from "next/dist/client/router";
@@ -49,7 +47,6 @@ export const getStaticProps = async ({
 
 export default function Home(props: HomeProps): JSX.Element {
   // const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
-  const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
   const t = useTranslations("Home");
 
@@ -59,25 +56,15 @@ export default function Home(props: HomeProps): JSX.Element {
       sponsorList={props.sponsorList}
       mediaPartnerList={props.mediaPartnerList}
       additionalList={props.additionalList}
+      menuItems={props.menuItems}
     >
       <NextHead>
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
-      <Bubble
-        className="fixed left-1 top-9 sm:left-2 sm:top-14 z-10"
-        onClick={() => setShowMenu(true)}
-      >
-        <NextImage src="/burger-menu.svg" layout="fill" objectFit="contain" />
-      </Bubble>
-      <Menu
-        showMenu={showMenu}
-        onClose={() => setShowMenu(false)}
-        items={props.menuItems}
-      />
       <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
         <a>
-          <Bubble className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl sm:text-3xl font-important">
+          <Bubble className="fixed right-2 top-2 sm:right-4 sm:top-4 z-10 text-xl sm:text-3xl font-important">
             {router.locale === "de" ? "en" : "de"}
           </Bubble>
         </a>
