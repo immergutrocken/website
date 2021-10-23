@@ -37,12 +37,14 @@ const NewsletterRegistration = (): JSX.Element => {
 
   return (
     <>
-      <h2 className="text-3xl sm:text-6xl text-center">{t("newsletter")}</h2>
-      <div className="flex flex-row space-x-2 justify-center">
+      <h2 className="text-3xl sm:text-6xl text-center font-important">
+        {t("newsletter")}
+      </h2>
+      <div className="flex flex-row space-x-2 justify-center mt-4">
         <input
           className={`${
             isValid ? "" : styles.invalid
-          } text-lg sm:text-3xl bg-gray-200 rounded-full px-4 sm:px-6 pt-1 sm:pt-2 focus:outline-none`}
+          } w-56 sm:w-96 text-lg sm:text-3xl bg-gray-200 rounded-full px-3 sm:px-4 focus:outline-none font-important`}
           placeholder={t("your-email-address").toString()}
           value={eMailAddress}
           type="email"

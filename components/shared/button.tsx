@@ -18,12 +18,12 @@ const Button = ({
   success = false,
 }: ButtonProps): JSX.Element => (
   <button
-    className={`text-white rounded-full focus:outline-none ${className} ${
+    className={`text-white rounded-full focus:outline-none font-important uppercase flex justify-center items-center ${className} ${
       active ? "bg-black" : "bg-gray-200"
     } ${disabled ? "cursor-not-allowed" : "cursor-pointer"} ${
       size === "small"
-        ? "pt-1 sm:pt-1.5 px-2.5 sm:px-4 text-base sm:text-xl"
-        : "pt-1 sm:pt-2 px-2.5 sm:px-4 text-lg sm:text-4xl"
+        ? "px-2.5 sm:px-4 text-base sm:text-xl h-6 sm:h-10"
+        : "px-2.5 sm:px-4 text-lg sm:text-4xl h-8 sm:h-14"
     } ${success ? "bg-green-500" : ""}`}
     onClick={() => (onClick ? onClick() : {})}
     disabled={disabled}

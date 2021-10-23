@@ -15,7 +15,9 @@ const Bubble = ({
   size = "large",
 }: BubbleProps): JSX.Element => {
   const sizeClasses =
-    size === "large" ? "w-9 h-9 sm:w-14 sm:h-14 p-2 sm:p-3" : "w-9 h-9 p-2";
+    size === "large"
+      ? "w-9 h-9 sm:w-14 sm:h-14 px-1 py-2 sm:p-3"
+      : "w-9 h-9 px-1 py-2";
 
   return (
     <button

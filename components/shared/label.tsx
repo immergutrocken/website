@@ -5,7 +5,7 @@ interface LabelProps {
 
 const Label = ({ children, className = "" }: LabelProps): JSX.Element => (
   <div className={"text-center " + className}>
-    <span className="border border-black rounded-full px-2 pt-1 sm:pt-1.5 uppercase text-sm sm:text-xl">
+    <span className="border-2 border-black rounded-full px-3 pt-2 pb-1 uppercase text-base sm:text-2xl font-important">
       {children}
     </span>
   </div>

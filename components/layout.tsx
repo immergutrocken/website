@@ -1,69 +1,52 @@
-import NextLink from "next/link";
-import styles from "../styles/layout.module.scss";
-import { INewsLink } from "../lib/news";
 import Notification from "./notification";
 import { INotification } from "../lib/notification";
 import { NotificationDisplayCategory } from "../lib/enums/notificationDisplayCategory";
-import { useTranslations } from "next-intl";
+import Footer from "./footer";
+import { IPartner } from "../lib/partner";
+import React, { useState } from "react";
+import Menu from "./menu";
+import Bubble from "./shared/bubble";
+import NextImage from "next/image";
+import { IMenuItem } from "../lib/menu";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[] | string;
-  newsLinkList: INewsLink[];
   notifcationList: INotification[];
+  sponsorList: IPartner[];
+  mediaPartnerList: IPartner[];
+  additionalList: IPartner[];
+  menuItems: IMenuItem[];
 }
-
-const buildDateAndLocation = (
-  times: number,
-  dateString: string
-): JSX.Element => {
-  const tempArray = [];
-  for (let index = 0; index < times; index++) {
-    tempArray.push(index);
-  }
-  return (
-    <>
-      {tempArray.map((index) => (
-        <span key={index}>{dateString} • Neustrelitz • </span>
-      ))}
-    </>
-  );
-};
 
 const Layout = ({
   children,
-  newsLinkList,
   notifcationList,
+  sponsorList,
+  mediaPartnerList,
+  additionalList,
+  menuItems,
 }: LayoutProps): JSX.Element => {
-  const t = useTranslations("Layout");
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <div className="py-8 sm:py-12">
-      <header className="fixed w-full top-0 z-10 bg-white flex flex-nowrap text-lg sm:text-4xl pt-1">
-        <span className="flex items-center px-1 sm:px-2">{t("news")}:</span>
-        <div
-          className={
-            "flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap w-full " +
-            styles.scrollbar
-          }
-        >
-          {newsLinkList.map((news: INewsLink, index: number) => {
-            return (
-              <span key={index}>
-                <NextLink href={`/article/${news.slug}`}>
-                  <a className="mx-2 sm:mx-4">{news.title}</a>
-                </NextLink>
-                {index === newsLinkList.length - 1 ? "" : "•"}
-              </span>
-            );
-          })}
-        </div>
-      </header>
+    <div>
+      <Bubble
+        className="fixed left-2 top-2 sm:left-4 sm:top-4 z-10"
+        onClick={() => setShowMenu(true)}
+      >
+        <NextImage src="/burger-menu.svg" layout="fill" objectFit="contain" />
+      </Bubble>
+      <Menu
+        showMenu={showMenu}
+        onClose={() => setShowMenu(false)}
+        items={menuItems}
+      />
       {children}
-      <div className="fixed bottom-0 text-lg sm:text-4xl px-2 sm:px-0 sm:py-2 whitespace-nowrap overflow-x-hidden bg-white">
-        <div className={styles.ticker}>
-          {buildDateAndLocation(10, t("date").toString())}
-        </div>
-      </div>
+      <Footer
+        sponsorList={sponsorList}
+        mediaPartnerList={mediaPartnerList}
+        additionalList={additionalList}
+      />
       <div className="fixed w-full bottom-0 z-20">
         {notifcationList
           ?.filter(

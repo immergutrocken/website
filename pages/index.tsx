@@ -1,24 +1,20 @@
 import NextHead from "next/head";
 import NextImage from "next/image";
-import Footer from "../components/footer";
 import { getNewsLinkList, INewsLink } from "../lib/news";
 import { getPartnerList, IPartner } from "../lib/partner";
 import PartnerCategory from "../lib/enums/partnerCategory.enum";
 import { getMenu, IMenuItem } from "../lib/menu";
 import { getArtistLinkList, IArtistLink } from "../lib/artist";
 import NextLink from "next/link";
-import Button from "../components/shared/button";
-import { useState } from "react";
-import { ArtistCategory } from "../lib/enums/artistCategory.enum";
+// import Button from "../components/shared/button";
+// import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Bubble from "../components/shared/bubble";
-import Menu from "../components/menu";
 import Layout from "../components/layout";
-import styles from "../styles/Home.module.scss";
 import { getNotificationList, INotification } from "../lib/notification";
-import useWindowScroll from "@react-hook/window-scroll";
 import { useRouter } from "next/dist/client/router";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
+import Label from "../components/shared/label";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -50,62 +46,46 @@ export const getStaticProps = async ({
 };
 
 export default function Home(props: HomeProps): JSX.Element {
-  const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
-  const [showMenu, setShowMenu] = useState(false);
-  const scroll = useWindowScroll(60);
+  // const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const router = useRouter();
   const t = useTranslations("Home");
 
   return (
     <Layout
-      newsLinkList={props.newsLinkList}
       notifcationList={props.notificationList}
+      sponsorList={props.sponsorList}
+      mediaPartnerList={props.mediaPartnerList}
+      additionalList={props.additionalList}
+      menuItems={props.menuItems}
     >
       <NextHead>
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
-      <Bubble
-        className="fixed left-1 top-9 sm:left-2 sm:top-14 z-10"
-        onClick={() => setShowMenu(true)}
-      >
-        <NextImage src="/burger-menu.svg" layout="fill" objectFit="contain" />
-      </Bubble>
-      <Menu
-        showMenu={showMenu}
-        onClose={() => setShowMenu(false)}
-        items={props.menuItems}
-      />
       <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
         <a>
-          <Bubble className="fixed right-1 top-9 sm:right-2 sm:top-14 z-10 text-xl pt-3 pl-1.5 sm:text-3xl sm:pt-4 sm:pl-2.5">
+          <Bubble className="fixed right-2 top-2 sm:right-4 sm:top-4 z-10 text-xl sm:text-3xl font-important">
             {router.locale === "de" ? "en" : "de"}
           </Bubble>
         </a>
       </NextLink>
       <div className="block sm:hidden">
         <NextImage
-          src="/images/ig-website-mobile-illu.jpg"
-          width="320"
-          height="455"
+          src="/images/ig-website-mobile-cd.png"
+          width="1080"
+          height="1534"
           layout="responsive"
         />
       </div>
       <div className="hidden sm:block">
         <NextImage
-          src="/images/ig-website-desktop-illu2.jpg"
-          width="1440"
-          height="587"
+          src="/images/ig-website-desktop-cd.png"
+          width="3280"
+          height="1336"
           layout="responsive"
         />
       </div>
-      <div
-        className={`absolute ${styles.logo}`}
-        style={{ transform: `rotate(${scroll}deg)` }}
-      >
-        <NextImage src="/images/ig-motto-logo1.svg" layout="fill" />
-      </div>
-      <div className="mt-4 sm:mt-6 text-center">
+      {/* <div className="mt-4 sm:mt-6 text-center">
         <Button
           className="mx-2"
           onClick={() =>
@@ -138,9 +118,22 @@ export default function Home(props: HomeProps): JSX.Element {
         >
           {t("readings").toString()}
         </Button>
+      </div> */}
+      <div className="mt-4 sm:mt-6 text-3xl text-center">
+        <Label>{t("news")}</Label>
       </div>
-      <div className="mt-4 sm:mt-6 text-4xl sm:text-6xl text-center flex flex-row flex-wrap justify-center">
-        {props.artistLinkList
+      <div className="mt-4 sm:mt-6 text-3xl sm:text-5xl text-center flex flex-row flex-wrap justify-center font-important">
+        {props.newsLinkList.map((news: INewsLink, index: number) => {
+          return (
+            <span key={index}>
+              <NextLink href={`/article/${news.slug}`}>
+                <a className="mx-2 sm:mx-4">{news.title}</a>
+              </NextLink>
+              {index === props.newsLinkList.length - 1 ? "" : "•"}
+            </span>
+          );
+        })}
+        {/* {props.artistLinkList
           .filter((link) =>
             filterCategory === null ? true : link.category === filterCategory
           )
@@ -151,13 +144,8 @@ export default function Home(props: HomeProps): JSX.Element {
               </NextLink>
               {index === array.length - 1 ? "" : "•"}
             </span>
-          ))}
+          ))} */}
       </div>
-      <Footer
-        sponsorList={props.sponsorList}
-        mediaPartnerList={props.mediaPartnerList}
-        additionalList={props.additionalList}
-      />
     </Layout>
   );
 }

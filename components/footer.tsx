@@ -22,7 +22,7 @@ const Footer = ({
 
   return (
     <>
-      <div className="mt-12 sm:mt-20">
+      <div className="mt-8 sm:mt-12">
         <NewsletterRegistration />
       </div>
       <div className="flex flex-row mt-4 justify-center flex-wrap">
@@ -59,7 +59,7 @@ const Footer = ({
           className="mt-4 sm:mt-6"
         />
       </div>
-      <div className="w-full text-center p-3 mb-8 sm:mb-16 font-content mx-auto max-w-3xl">
+      <div className="w-full text-center p-3 mb-6 sm:mb-10 font-content mx-auto max-w-3xl">
         <p>
           Immergut Festival / Am Bürgerseeweg 28 / 17235 Neustrelitz
           <br />
