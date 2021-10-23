@@ -10,12 +10,12 @@
   "Home": {
     "music": "Music",
     "readings": "Readings",
-    "festival": "21st Immergut Festival",
+    "festival": "Immergut Festival",
     "news": "News"
   },
   "Article": {
     "photo": "Photo",
     "text": "Text",
-    "festival": "21st Immergut Festival"
+    "festival": "Immergut Festival"
   }
 }
