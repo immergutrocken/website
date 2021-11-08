@@ -57,8 +57,21 @@ export const getArticle = async (
     title: locale === "en" && result.titleEn ? result.titleEn : result.titleDe,
     banner: {
       ...result.banner,
-      url: urlFor(result.banner.asset).height(1000).url(),
-      urlWithBlur: urlFor(result.banner.asset).blur(200).height(1000).url(),
+      url: urlFor(result.banner.asset)
+        .width(1000)
+        .height(1000)
+        .fit("crop")
+        .crop("focalpoint")
+        .focalPoint(result.banner.hotspot.x, result.banner.hotspot.y)
+        .url(),
+      urlWithBlur: urlFor(result.banner.asset)
+        .width(1000)
+        .height(1000)
+        .fit("crop")
+        .crop("focalpoint")
+        .focalPoint(result.banner.hotspot.x, result.banner.hotspot.y)
+        .blur(200)
+        .url(),
     },
     content:
       locale === "en" && result.contentEn ? result.contentEn : result.contentDe,
