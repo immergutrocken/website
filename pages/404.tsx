@@ -54,7 +54,7 @@ const Custom404 = ({
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
-      <div className="h-1/2 px-7 mt-20 text-center">
+      <div className="px-7 pt-20 text-center">
         <h1 className="text-3xl">{t("title")}</h1>
         <p>
           {t("text-part-1")}
