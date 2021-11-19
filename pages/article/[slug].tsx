@@ -107,10 +107,12 @@ const Article = ({
             <Label>{t("photo").toString()}</Label>
             <span className="font-important">{banner.credits}</span>
           </div>
-          <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:text-3xl">
-            <Label>{t("text").toString()}</Label>
-            <span className="font-important">{author}</span>
-          </div>
+          {author && (
+            <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:text-3xl">
+              <Label>{t("text").toString()}</Label>
+              <span className="font-important">{author}</span>
+            </div>
+          )}
           <div className="mt-5 font-content">
             <Content content={content} />
           </div>
