@@ -137,10 +137,12 @@ const Artist = ({
             <Label>{t("photo").toString()}</Label>
             <span className="font-important">{banner.credits}</span>
           </div>
-          <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:justify-center sm:text-3xl">
-            <Label>{t("text").toString()}</Label>
-            <span className="font-important">{author}</span>
-          </div>
+          {author && (
+            <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:justify-center sm:text-3xl">
+              <Label>{t("text").toString()}</Label>
+              <span className="font-important">{author}</span>
+            </div>
+          )}
           <div className="flex flex-row flex-wrap mt-3 sm:mt-6 sm:justify-center">
             {socialMedia.map((element, index) => (
               <Link

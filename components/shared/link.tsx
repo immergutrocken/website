@@ -19,7 +19,7 @@ const Link = ({
     rel="noreferrer"
     className={`hover:underline focus:outline-none ${className}`}
     title={title}
-    onClick={() => click()}
+    onClick={() => (click ? click() : {})}
   >
     {children}
   </a>
