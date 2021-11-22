@@ -4,8 +4,6 @@ import { IMenuItem } from "../lib/menu";
 import { MenuItemType } from "../lib/enums/menuItemType.enum";
 import Link from "./shared/link";
 import NextLink from "next/link";
-import Expander from "./shared/expander";
-import styles from "../styles/menu.module.scss";
 import { useRouter } from "next/dist/client/router";
 
 interface MenuProps {
@@ -35,13 +33,14 @@ const buildMenuItem = (item: IMenuItem, onClose: () => void): JSX.Element => {
       );
     case MenuItemType.SUBMENU:
       return (
-        <Expander title={item.title.de}>
+        <>
+          <div>{item.title.de}</div>
           {item.submenuItems.map((subMenuItem, index) => (
-            <div className={`text-white ${styles.textStroke}`} key={index}>
+            <div className="text-lg sm:text-3xl" key={index}>
               {buildMenuItem(subMenuItem, onClose)}
             </div>
           ))}
-        </Expander>
+        </>
       );
     default:
       throw new Error(`No menu item implemented for type ${item.type}`);
@@ -58,7 +57,7 @@ const Menu = ({
 
   return (
     <div
-      className={`w-full px-2 overflow-y-auto sm:w-1/2 bg-white fixed z-20 left-0 h-full font-important ${displayClass}`}
+      className={`w-full px-2 overflow-y-auto sm:w-auto sm:px-12 bg-white fixed z-20 left-0 h-full font-important ${displayClass}`}
     >
       <Bubble className="absolute top-3 right-3" onClick={() => onClose()}>
         <NextImage src="/close.svg" layout="fill" objectFit="contain" />
