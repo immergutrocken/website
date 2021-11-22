@@ -116,19 +116,15 @@ const Artist = ({
       </NextHead>
       <div className="grid grid-cols-1 h-full sm:grid-cols-2 sm:space-x-5">
         <div
-          className={`relative sm:sticky sm:top-0 h-72 sm:max-h-screen sm:h-full`}
+          className={`relative sm:sticky sm:top-0 sm:max-h-screen sm:h-full`}
         >
           <NextImage
-            src={banner.urlWithBlur}
-            layout="fill"
-            objectFit="cover"
-            alt={banner.alt}
-          />
-          <NextImage
             src={banner.url}
-            layout="fill"
-            objectFit="contain"
+            width="1000"
+            height="1000"
             alt={banner.alt}
+            placeholder="blur"
+            blurDataURL={banner.urlWithBlur}
           />
         </div>
         <div className="py-5 px-4">
