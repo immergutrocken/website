@@ -62,7 +62,15 @@ export const getStaticProps = async ({
 }: GetStaticPropsContext<ArtistParams>): Promise<
   GetStaticPropsResult<ArtistProps>
 > => {
-  const artist = await getArtist(params.slug, locale);
+  let artist: IArtist;
+  try {
+    artist = await getArtist(params.slug, locale);
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       ...artist,
