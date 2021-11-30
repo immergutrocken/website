@@ -94,8 +94,36 @@ export const getArtist = async (
     title: locale === "en" && result.titleEn ? result.titleEn : result.titleDe,
     banner: {
       ...result.banner,
-      url: urlFor(result.banner.asset).height(1000).url(),
-      urlWithBlur: urlFor(result.banner.asset).blur(200).height(1000).url(),
+      url: result.banner.hotspot
+        ? urlFor(result.banner.asset)
+            .height(1000)
+            .width(1000)
+            .fit("crop")
+            .crop("focalpoint")
+            .focalPoint(result.banner.hotspot.x, result.banner.hotspot.y)
+            .url()
+        : urlFor(result.banner.asset)
+            .height(1000)
+            .width(1000)
+            .fit("crop")
+            .crop("center")
+            .url(),
+      urlWithBlur: result.banner.hotspot
+        ? urlFor(result.banner.asset)
+            .blur(200)
+            .height(1000)
+            .width(1000)
+            .fit("crop")
+            .crop("focalpoint")
+            .focalPoint(result.banner.hotspot.x, result.banner.hotspot.y)
+            .url()
+        : urlFor(result.banner.asset)
+            .blur(200)
+            .height(1000)
+            .width(1000)
+            .fit("crop")
+            .crop("center")
+            .url(),
     },
     socialMedia: result.socialMedia.map((element) => ({
       type: socialMediaMapping.get(element.medium),

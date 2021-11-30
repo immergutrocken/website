@@ -15,6 +15,8 @@ import { useRouter } from "next/dist/client/router";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
 import Label from "../components/shared/label";
+import bannerMobile from "../public/images/ig-website-mobile-cd.png";
+import bannerDesktop from "../public/images/ig-website-desktop-cd.png";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -71,18 +73,20 @@ export default function Home(props: HomeProps): JSX.Element {
       </NextLink>
       <div className="block sm:hidden">
         <NextImage
-          src="/images/ig-website-mobile-cd.png"
+          src={bannerMobile}
           width="1080"
           height="1534"
           layout="responsive"
+          placeholder="blur"
         />
       </div>
       <div className="hidden sm:block">
         <NextImage
-          src="/images/ig-website-desktop-cd.png"
+          src={bannerDesktop}
           width="3280"
           height="1336"
           layout="responsive"
+          placeholder="blur"
         />
       </div>
       {/* <div className="mt-4 sm:mt-6 text-center">
