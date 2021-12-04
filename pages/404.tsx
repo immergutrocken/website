@@ -39,7 +39,7 @@ const Custom404 = ({
   mediaPartnerList,
   additionalList,
   menuItems,
-}) => {
+}: Custom404Props): JSX.Element => {
   const t = useTranslations("404");
 
   return (
@@ -55,8 +55,8 @@ const Custom404 = ({
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
       <div className="px-7 pt-20 text-center">
-        <h1 className="text-3xl">{t("title")}</h1>
-        <p>
+        <h1 className="text-3xl font-important">{t("title")}</h1>
+        <p className="font-content">
           {t("text-part-1")}
           <br />
           {t("text-part-2")}
