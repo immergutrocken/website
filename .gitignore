@@ -35,5 +35,4 @@ yarn-error.log*
 .test-coverage
 
 yarn.lock
-.idea
 .vscode

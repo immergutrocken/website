@@ -7,7 +7,7 @@ interface IData {
   IsUnsubscribed: boolean;
 }
 
-export default async (
+const addEmailAddressToContactList = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
@@ -61,3 +61,5 @@ export default async (
     });
   }
 };
+
+export default addEmailAddressToContactList;
