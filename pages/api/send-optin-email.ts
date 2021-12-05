@@ -7,7 +7,7 @@ interface IBody {
   eMailAddress: string;
 }
 
-export default async (
+const sendOptinEmail = async (
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> => {
@@ -57,3 +57,5 @@ export default async (
       res.status(500).json(error);
     });
 };
+
+export default sendOptinEmail;
