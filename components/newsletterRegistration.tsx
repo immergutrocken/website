@@ -50,7 +50,7 @@ const NewsletterRegistration = (): JSX.Element => {
           type="email"
           onChange={(event) => setEMailAddress(event.target.value)}
         />
-        <Button onClick={() => handleClick()} success={success}>
+        <Button click={() => handleClick()} success={success}>
           Ok
         </Button>
       </div>

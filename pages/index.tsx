@@ -8,10 +8,8 @@ import { getArtistLinkList, IArtistLink } from "../lib/artist";
 import NextLink from "next/link";
 // import Button from "../components/shared/button";
 // import { ArtistCategory } from "../lib/enums/artistCategory.enum";
-import Bubble from "../components/shared/bubble";
 import Layout from "../components/layout";
 import { getNotificationList, INotification } from "../lib/notification";
-import { useRouter } from "next/dist/client/router";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
 import Label from "../components/shared/label";
@@ -49,7 +47,6 @@ export const getStaticProps = async ({
 
 export default function Home(props: HomeProps): JSX.Element {
   // const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
-  const router = useRouter();
   const t = useTranslations("Home");
 
   return (
@@ -64,13 +61,6 @@ export default function Home(props: HomeProps): JSX.Element {
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
-      <NextLink href="/" locale={router.locale === "de" ? "en" : "de"}>
-        <a>
-          <Bubble className="fixed right-2 top-2 sm:right-4 sm:top-4 z-10 text-xl sm:text-3xl font-important">
-            {router.locale === "de" ? "en" : "de"}
-          </Bubble>
-        </a>
-      </NextLink>
       <div className="block sm:hidden">
         <NextImage
           src={bannerMobile}

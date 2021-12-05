@@ -17,5 +17,8 @@
     "photo": "Foto",
     "text": "Text",
     "festival": "Immergut Festival"
+  },
+  "Layout": {
+    "ticket-shop": "Kartenladen"
   }
 }

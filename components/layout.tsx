@@ -8,6 +8,10 @@ import Menu from "./menu";
 import Bubble from "./shared/bubble";
 import NextImage from "next/image";
 import { IMenuItem } from "../lib/menu";
+import Button from "./shared/button";
+import { useRouter } from "next/router";
+import NextLink from "next/link";
+import { useTranslations } from "next-intl";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -27,6 +31,8 @@ const Layout = ({
   menuItems,
 }: LayoutProps): JSX.Element => {
   const [showMenu, setShowMenu] = useState(false);
+  const router = useRouter();
+  const t = useTranslations("Layout");
 
   return (
     <div>
@@ -41,6 +47,23 @@ const Layout = ({
         onClose={() => setShowMenu(false)}
         items={menuItems}
       />
+      <div className="fixed right-2 top-2 sm:right-4 sm:top-4 z-10 flex gap-2 sm:gap-4">
+        <NextLink href="/article/kartenladen">
+          <a className="hover:no-underline">
+            <Button className="bg-grasshopper">{t("ticket-shop")}</Button>
+          </a>
+        </NextLink>
+        <NextLink
+          href={router.asPath}
+          locale={router.locale === "de" ? "en" : "de"}
+        >
+          <a>
+            <Bubble className="text-xl sm:text-3xl font-important">
+              {router.locale === "de" ? "en" : "de"}
+            </Bubble>
+          </a>
+        </NextLink>
+      </div>
       {children}
       <Footer
         sponsorList={sponsorList}

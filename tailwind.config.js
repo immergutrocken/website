@@ -7,6 +7,10 @@ module.exports = {
       content: ["Ludwig-Normal"],
       important: ["Ludwig-Bold"],
     },
+    backgroundColor: (theme) => ({
+      ...theme("colors"),
+      grasshopper: "#98CE58",
+    }),
   },
   variants: {
     extend: {},

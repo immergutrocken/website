@@ -17,5 +17,8 @@
     "photo": "Photo",
     "text": "Text",
     "festival": "Immergut Festival"
+  },
+  "Layout": {
+    "ticket-shop": "ticket shop"
   }
 }
