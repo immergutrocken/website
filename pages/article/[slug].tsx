@@ -49,7 +49,15 @@ export const getStaticProps = async ({
 }: GetStaticPropsContext<ArticleParams>): Promise<
   GetStaticPropsResult<ArticleProps>
 > => {
-  const article = await getArticle(params.slug, locale);
+  let article: IArticle;
+  try {
+    article = await getArticle(params.slug, locale);
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       ...article,
