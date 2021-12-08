@@ -21,7 +21,7 @@ const ExternalLink = ({ mark, children }: ExternalLinkProps): JSX.Element => {
   return (
     <Link
       href={mark.url}
-      className={`font-bold ${mark.isCTA ? "font-milona mb-4" : ""}`}
+      className={`font-bold ${mark.isCTA ? "font-important mb-4" : ""}`}
     >
       {buildChildren(mark.isCTA, children)}
     </Link>

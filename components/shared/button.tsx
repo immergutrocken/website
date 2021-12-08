@@ -1,7 +1,7 @@
 interface ButtonProps {
   children: JSX.Element | string;
   className?: string;
-  onClick?: () => void;
+  click?: (event?) => void;
   disabled?: boolean;
   active?: boolean;
   size?: "small" | "large";
@@ -11,7 +11,7 @@ interface ButtonProps {
 const Button = ({
   children,
   className = "",
-  onClick,
+  click,
   disabled = false,
   active = true,
   size = "large",
@@ -22,10 +22,10 @@ const Button = ({
       active ? "bg-black" : "bg-gray-200"
     } ${disabled ? "cursor-not-allowed" : "cursor-pointer"} ${
       size === "small"
-        ? "px-2.5 sm:px-4 text-base sm:text-xl h-6 sm:h-10"
-        : "px-2.5 sm:px-4 text-lg sm:text-4xl h-8 sm:h-14"
-    } ${success ? "bg-green-500" : ""}`}
-    onClick={() => (onClick ? onClick() : {})}
+        ? "pt-px px-2.5 sm:px-4 text-base sm:text-xl h-6 sm:h-10"
+        : "pt-px sm:pt-1 px-2.5 sm:px-4 text-lg sm:text-4xl h-8 sm:h-14"
+    } ${success ? "bg-grasshopper" : ""}`}
+    onClick={() => (click ? click() : {})}
     disabled={disabled}
   >
     {children}

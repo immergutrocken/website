@@ -18,6 +18,9 @@
     "text": "Text",
     "festival": "Immergut Festival"
   },
+  "Layout": {
+    "ticket-shop": "ticket shop"
+  },
   "404": {
     "title": "Error code 404",
     "text-part-1": "Error 404 doesn't perfom at Immergut Festival this year.",

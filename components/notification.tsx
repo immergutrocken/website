@@ -50,7 +50,7 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
       <div className="text-right">
         <Button
           size="small"
-          onClick={() => {
+          click={() => {
             setHidden(true);
             localStorage.setItem(key, accepted);
           }}
@@ -75,7 +75,7 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
         <div className="text-right">
           <Button
             size="small"
-            onClick={() => {
+            click={() => {
               setHidden(true);
               localStorage.setItem(key, accepted);
             }}

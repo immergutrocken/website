@@ -18,6 +18,9 @@
     "text": "Text",
     "festival": "Immergut Festival"
   },
+  "Layout": {
+    "ticket-shop": "Kartenladen"
+  },
   "404": {
     "title": "Fehlercode 404",
     "text-part-1": "Fehler 404 spielt eigentlich nicht auf dem diesjährigen Immergut Festival.",
