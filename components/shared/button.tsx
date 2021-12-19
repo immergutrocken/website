@@ -24,7 +24,7 @@ const Button = ({
       size === "small"
         ? "pt-px px-2.5 sm:px-4 text-base sm:text-xl h-6 sm:h-10"
         : "pt-px sm:pt-1 px-2.5 sm:px-4 text-lg sm:text-4xl h-8 sm:h-14"
-    } ${success ? "bg-grasshopper" : ""}`}
+    } ${success ? "!bg-grasshopper" : ""}`}
     onClick={() => (click ? click() : {})}
     disabled={disabled}
   >
