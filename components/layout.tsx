@@ -38,7 +38,7 @@ const Layout = ({
   return (
     <div>
       <Bubble
-        className="fixed left-2 top-2 sm:left-4 sm:top-4 z-10"
+        className="fixed z-10 left-2 top-2 sm:left-4 sm:top-4"
         onClick={() => setShowMenu(true)}
       >
         <NextImage src="/burger-menu.svg" layout="fill" objectFit="contain" />
@@ -48,12 +48,12 @@ const Layout = ({
         onClose={() => setShowMenu(false)}
         items={menuItems}
       />
-      <div className="fixed right-2 top-2 sm:right-4 sm:top-4 z-10 flex gap-2 sm:gap-4">
+      <div className="fixed z-10 flex gap-2 right-2 top-2 sm:right-4 sm:top-4 sm:gap-4">
         <Link
           href="https://immergut.tickettoaster.de/tickets"
           className="hover:no-underline"
         >
-          <Button className="bg-grasshopper">{t("ticket-shop")}</Button>
+          <Button className="!bg-grasshopper">{t("ticket-shop")}</Button>
         </Link>
         <NextLink
           href={router.asPath}
@@ -72,7 +72,7 @@ const Layout = ({
         mediaPartnerList={mediaPartnerList}
         additionalList={additionalList}
       />
-      <div className="fixed w-full bottom-0 z-20">
+      <div className="fixed bottom-0 z-20 w-full">
         {notifcationList
           ?.filter(
             (notification) =>
