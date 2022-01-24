@@ -24,6 +24,7 @@ interface HomeProps {
   menuItems: IMenuItem[];
   artistLinkList: IArtistLink[];
   notificationList: INotification[];
+  newsList: INewsLink[];
   messages: unknown;
 }
 
@@ -39,6 +40,7 @@ export const getStaticProps = async ({
       menuItems: await getMenu(),
       artistLinkList: await getArtistLinkList(locale),
       notificationList: await getNotificationList(locale),
+      newsList: await getNewsLinkList(locale),
       messages: require(`../messages/${locale}.json`),
     },
     revalidate: 1,
@@ -56,12 +58,13 @@ export default function Home(props: HomeProps): JSX.Element {
       mediaPartnerList={props.mediaPartnerList}
       additionalList={props.additionalList}
       menuItems={props.menuItems}
+      newsList={props.newsLinkList}
     >
       <NextHead>
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
-      <div className="block sm:hidden">
+      <div className="block pt-9 sm:hidden">
         <NextImage
           src={bannerMobile}
           width="1080"
@@ -70,7 +73,7 @@ export default function Home(props: HomeProps): JSX.Element {
           placeholder="blur"
         />
       </div>
-      <div className="hidden sm:block">
+      <div className="hidden sm:pt-10 sm:block">
         <NextImage
           src={bannerDesktop}
           width="3280"
@@ -79,7 +82,7 @@ export default function Home(props: HomeProps): JSX.Element {
           placeholder="blur"
         />
       </div>
-      {/* <div className="mt-4 sm:mt-6 text-center">
+      {/* <div className="mt-4 text-center sm:mt-6">
         <Button
           className="mx-2"
           onClick={() =>
@@ -113,10 +116,10 @@ export default function Home(props: HomeProps): JSX.Element {
           {t("readings").toString()}
         </Button>
       </div> */}
-      <div className="mt-4 sm:mt-6 text-3xl text-center">
+      <div className="mt-4 text-3xl text-center sm:mt-6">
         <Label>{t("news")}</Label>
       </div>
-      <div className="mt-4 sm:mt-6 text-3xl sm:text-5xl text-center flex flex-row flex-wrap justify-center font-important">
+      <div className="flex flex-row flex-wrap justify-center mt-4 text-3xl text-center sm:mt-6 sm:text-5xl font-important">
         {props.newsLinkList.map((news: INewsLink, index: number) => {
           return (
             <span key={index}>
