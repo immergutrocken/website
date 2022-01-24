@@ -15,6 +15,9 @@ import { useTranslations } from "next-intl";
 import Label from "../components/shared/label";
 import bannerMobile from "../public/images/ig-website-mobile-cd.png";
 import bannerDesktop from "../public/images/ig-website-desktop-cd.png";
+import { ArtistCategory } from "../lib/enums/artistCategory.enum";
+import Button from "../components/shared/button";
+import { useState } from "react";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -48,7 +51,7 @@ export const getStaticProps = async ({
 };
 
 export default function Home(props: HomeProps): JSX.Element {
-  // const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
+  const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const t = useTranslations("Home");
 
   return (
@@ -82,66 +85,65 @@ export default function Home(props: HomeProps): JSX.Element {
           placeholder="blur"
         />
       </div>
-      {/* <div className="mt-4 text-center sm:mt-6">
-        <Button
-          className="mx-2"
-          onClick={() =>
-            setFilterCategory(
-              filterCategory === ArtistCategory.MUSIC
-                ? null
-                : ArtistCategory.MUSIC
-            )
-          }
-          active={
-            filterCategory === ArtistCategory.MUSIC || filterCategory === null
-          }
-          size="small"
-        >
-          {t("music").toString()}
-        </Button>
-        <Button
-          className="mx-2"
-          onClick={() =>
-            setFilterCategory(
-              filterCategory === ArtistCategory.READING
-                ? null
-                : ArtistCategory.READING
-            )
-          }
-          active={
-            filterCategory === ArtistCategory.READING || filterCategory === null
-          }
-          size="small"
-        >
-          {t("readings").toString()}
-        </Button>
-      </div> */}
-      <div className="mt-4 text-3xl text-center sm:mt-6">
-        <Label>{t("news")}</Label>
+      <div className="mt-4 text-3xl text-center sm-mt-6">
+        <Label>Line Up</Label>
+      </div>
+      <div className="flex justify-center mt-4 sm:mt-6">
+        {props.artistLinkList.some(
+          (link) => link.category === ArtistCategory.MUSIC
+        ) && (
+          <Button
+            className="mx-2"
+            click={() =>
+              setFilterCategory(
+                filterCategory === ArtistCategory.MUSIC
+                  ? null
+                  : ArtistCategory.MUSIC
+              )
+            }
+            active={
+              filterCategory === ArtistCategory.MUSIC || filterCategory === null
+            }
+            size="small"
+          >
+            {t("music").toString()}
+          </Button>
+        )}
+        {props.artistLinkList.some(
+          (link) => link.category === ArtistCategory.READING
+        ) && (
+          <Button
+            className="mx-2"
+            click={() =>
+              setFilterCategory(
+                filterCategory === ArtistCategory.READING
+                  ? null
+                  : ArtistCategory.READING
+              )
+            }
+            active={
+              filterCategory === ArtistCategory.READING ||
+              filterCategory === null
+            }
+            size="small"
+          >
+            {t("readings").toString()}
+          </Button>
+        )}
       </div>
       <div className="flex flex-row flex-wrap justify-center mt-4 text-3xl text-center sm:mt-6 sm:text-5xl font-important">
-        {props.newsLinkList.map((news: INewsLink, index: number) => {
-          return (
-            <span key={index}>
-              <NextLink href={`/article/${news.slug}`}>
-                <a className="mx-2 sm:mx-4">{news.title}</a>
-              </NextLink>
-              {index === props.newsLinkList.length - 1 ? "" : "•"}
-            </span>
-          );
-        })}
-        {/* {props.artistLinkList
+        {props.artistLinkList
           .filter((link) =>
             filterCategory === null ? true : link.category === filterCategory
           )
           .map((link, index, array) => (
             <span key={index}>
               <NextLink href={`/artist/${link.slug}`}>
-                <a className="sm:mx-5">{link.title}</a>
+                <a className="mx-2 sm:mx-5">{link.title}</a>
               </NextLink>
               {index === array.length - 1 ? "" : "•"}
             </span>
-          ))} */}
+          ))}
       </div>
     </Layout>
   );

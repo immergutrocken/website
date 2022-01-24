@@ -114,7 +114,7 @@ const Article = ({
             blurDataURL={banner.urlWithBlur}
           />
         </div>
-        <div className="px-4 pb-5 pt-14 sm:pt-28 sm:pb-5">
+        <div className="px-4 pb-5 pt-14 sm:pt-32 sm:pb-5">
           <h1 className="text-4xl sm:text-7xl font-important">{title}</h1>
           <div className="flex flex-row mt-5 space-x-4 sm:mt-8 sm:text-3xl">
             <Label>{t("photo").toString()}</Label>

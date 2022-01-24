@@ -127,9 +127,9 @@ const Artist = ({
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>
-      <div className="grid h-full grid-cols-1 sm:grid-cols-2 sm:space-x-5">
+      <div className="grid h-full grid-cols-1 sm:grid-cols-2 sm:space-x-5 sm:px-6 sm:pt-6">
         <div
-          className={`relative top-9 sm:sticky sm:top-0 sm:max-h-screen sm:h-full`}
+          className={`relative top-9 sm:sticky sm:top-0 sm:max-h-screen sm:h-full flex items-center`}
         >
           <NextImage
             src={banner.url}
@@ -140,8 +140,10 @@ const Artist = ({
             blurDataURL={banner.urlWithBlur}
           />
         </div>
-        <div className="px-4 pb-5 pt-14 sm:pt-28 sm:pb-5">
-          <h1 className="text-4xl sm:text-7xl sm:text-center">{title}</h1>
+        <div className="px-4 pb-5 pt-14 sm:pt-32 sm:pb-5">
+          <h1 className="text-4xl sm:text-7xl sm:text-center font-important">
+            {title}
+          </h1>
           <div className="flex flex-row mt-5 space-x-4 sm:mt-8 sm:justify-center sm:text-3xl">
             <Label>{t("photo").toString()}</Label>
             <span className="font-important">{banner.credits}</span>
