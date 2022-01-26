@@ -15,6 +15,7 @@ import { useTranslations } from "next-intl";
 import { getPartnerList, IPartner } from "../../lib/partner";
 import PartnerCategory from "../../lib/enums/partnerCategory.enum";
 import { getMenu, IMenuItem } from "../../lib/menu";
+import { getNewsLinkList, INewsLink } from "../../lib/news";
 
 interface ArticleParams extends ParsedUrlQuery {
   slug: string;
@@ -26,6 +27,7 @@ interface ArticleProps extends IArticle {
   mediaPartnerList: IPartner[];
   additionalList: IPartner[];
   menuItems: IMenuItem[];
+  newsList: INewsLink[];
   messages: unknown;
 }
 
@@ -66,6 +68,7 @@ export const getStaticProps = async ({
       mediaPartnerList: await getPartnerList(PartnerCategory.MEDIA_PARTNER),
       additionalList: await getPartnerList(PartnerCategory.ADDITIONAL),
       menuItems: await getMenu(),
+      newsList: await getNewsLinkList(locale),
       messages: require(`../../messages/${locale}.json`),
     },
     revalidate: 1,
@@ -82,6 +85,7 @@ const Article = ({
   mediaPartnerList,
   additionalList,
   menuItems,
+  newsList,
 }: ArticleProps): JSX.Element => {
   const t = useTranslations("Article");
 
@@ -92,13 +96,14 @@ const Article = ({
       mediaPartnerList={mediaPartnerList}
       additionalList={additionalList}
       menuItems={menuItems}
+      newsList={newsList}
     >
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
       </NextHead>
-      <div className="grid grid-cols-1 h-full sm:grid-cols-2 sm:space-x-5 sm:px-6 sm:pt-6">
+      <div className="grid h-full grid-cols-1 sm:grid-cols-2 sm:space-x-5 sm:px-6 sm:pt-6">
         <div
-          className={`relative sm:sticky sm:top-0 sm:max-h-screen sm:h-full flex items-center`}
+          className={`relative top-9 sm:sticky sm:top-0 sm:max-h-screen sm:h-full flex items-center`}
         >
           <NextImage
             src={banner.url}
@@ -109,14 +114,14 @@ const Article = ({
             blurDataURL={banner.urlWithBlur}
           />
         </div>
-        <div className="py-5 px-4 sm:pt-16 sm:pb-5">
+        <div className="px-4 pb-5 pt-14 sm:pt-32 sm:pb-5">
           <h1 className="text-4xl sm:text-7xl font-important">{title}</h1>
-          <div className="flex flex-row space-x-4 mt-5 sm:mt-8 sm:text-3xl">
+          <div className="flex flex-row mt-5 space-x-4 sm:mt-8 sm:text-3xl">
             <Label>{t("photo").toString()}</Label>
             <span className="font-important">{banner.credits}</span>
           </div>
           {author && (
-            <div className="flex flex-row space-x-4 mt-2 sm:mt-4 sm:text-3xl">
+            <div className="flex flex-row mt-2 space-x-4 sm:mt-4 sm:text-3xl">
               <Label>{t("text").toString()}</Label>
               <span className="font-important">{author}</span>
             </div>

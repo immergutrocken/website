@@ -19,7 +19,8 @@
     "festival": "Immergut Festival"
   },
   "Layout": {
-    "ticket-shop": "Kartenladen"
+    "ticket-shop": "Kartenladen",
+    "news": "Neues"
   },
   "404": {
     "title": "Fehlercode 404",
