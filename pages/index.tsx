@@ -6,15 +6,13 @@ import PartnerCategory from "../lib/enums/partnerCategory.enum";
 import { getMenu, IMenuItem } from "../lib/menu";
 import { getArtistLinkList, IArtistLink } from "../lib/artist";
 import NextLink from "next/link";
-// import Button from "../components/shared/button";
-// import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Layout from "../components/layout";
 import { getNotificationList, INotification } from "../lib/notification";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
 import Label from "../components/shared/label";
-import bannerMobile from "../public/images/ig-website-mobile-cd.png";
-import bannerDesktop from "../public/images/ig-website-desktop-cd.png";
+import bannerMobile from "../public/images/ig-website-mobile-motto.png";
+import bannerDesktop from "../public/images/ig-website-desktop-motto.png";
 import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Button from "../components/shared/button";
 import { useState } from "react";
@@ -70,8 +68,8 @@ export default function Home(props: HomeProps): JSX.Element {
       <div className="block pt-9 sm:hidden">
         <NextImage
           src={bannerMobile}
-          width="1080"
-          height="1534"
+          width="1800"
+          height="2250"
           layout="responsive"
           placeholder="blur"
         />
@@ -79,8 +77,8 @@ export default function Home(props: HomeProps): JSX.Element {
       <div className="hidden sm:pt-10 sm:block">
         <NextImage
           src={bannerDesktop}
-          width="3280"
-          height="1336"
+          width="3200"
+          height="1800"
           layout="responsive"
           placeholder="blur"
         />
