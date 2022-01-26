@@ -13,6 +13,7 @@ import { useRouter } from "next/router";
 import NextLink from "next/link";
 import { useTranslations } from "next-intl";
 import Link from "./shared/link";
+import { INewsLink } from "../lib/news";
 
 interface LayoutProps {
   children: JSX.Element | JSX.Element[] | string;
@@ -21,6 +22,7 @@ interface LayoutProps {
   mediaPartnerList: IPartner[];
   additionalList: IPartner[];
   menuItems: IMenuItem[];
+  newsList: INewsLink[];
 }
 
 const Layout = ({
@@ -30,6 +32,7 @@ const Layout = ({
   mediaPartnerList,
   additionalList,
   menuItems,
+  newsList,
 }: LayoutProps): JSX.Element => {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
@@ -37,8 +40,25 @@ const Layout = ({
 
   return (
     <div>
+      <div className="fixed top-0 z-10 flex w-full py-1 text-lg bg-white flex-nowrap sm:text-4xl font-important">
+        <span className="flex items-center px-1 sm:px-2">{t("news")}:</span>
+        <div
+          className={
+            "flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap w-full scrollbar"
+          }
+        >
+          {newsList.map((news, index) => (
+            <span key={index}>
+              <NextLink href={`/article/${news.slug}`}>
+                <a className="mx-2 sm:mx-4">{news.title}</a>
+              </NextLink>
+              {index === newsList.length - 1 ? "" : "•"}
+            </span>
+          ))}
+        </div>
+      </div>
       <Bubble
-        className="fixed z-10 left-2 top-2 sm:left-4 sm:top-4"
+        className="fixed z-10 left-2 top-12 sm:left-4 sm:top-16"
         onClick={() => setShowMenu(true)}
       >
         <NextImage src="/burger-menu.svg" layout="fill" objectFit="contain" />
@@ -48,7 +68,7 @@ const Layout = ({
         onClose={() => setShowMenu(false)}
         items={menuItems}
       />
-      <div className="fixed z-10 flex gap-2 right-2 top-2 sm:right-4 sm:top-4 sm:gap-4">
+      <div className="fixed z-10 flex gap-2 right-2 top-12 sm:right-4 sm:top-16 sm:gap-4">
         <Link
           href="https://immergut.tickettoaster.de/tickets"
           className="hover:no-underline"
