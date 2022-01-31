@@ -68,8 +68,8 @@ export default function Home(props: HomeProps): JSX.Element {
       <div className="block pt-9 sm:hidden">
         <NextImage
           src={bannerMobile}
-          width="1800"
-          height="2250"
+          width={bannerMobile.width}
+          height={bannerMobile.height}
           layout="responsive"
           placeholder="blur"
         />
@@ -77,8 +77,8 @@ export default function Home(props: HomeProps): JSX.Element {
       <div className="hidden sm:pt-10 sm:block">
         <NextImage
           src={bannerDesktop}
-          width="3200"
-          height="1800"
+          width={bannerDesktop.width}
+          height={bannerDesktop.height}
           layout="responsive"
           placeholder="blur"
         />

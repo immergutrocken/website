@@ -1,32 +1,32 @@
 interface ISocialMediaElement {
   url: string;
-  imageUrl: string;
+  brandLogo: string;
 }
 
 const socialMedia: ISocialMediaElement[] = [
   {
     url: "https://open.spotify.com/user/immergut_festival",
-    imageUrl: "/spotify-logo.svg",
+    brandLogo: "spotify",
   },
   {
     url: "https://www.youtube.com/immergutfestival",
-    imageUrl: "/youtube-logo.svg",
+    brandLogo: "youtube",
   },
   {
     url: "https://www.facebook.com/immergutrocken",
-    imageUrl: "/facebook-logo.svg",
+    brandLogo: "facebook-f",
   },
   {
     url: "https://instagram.com/immergutrocken",
-    imageUrl: "/instagram-logo.svg",
+    brandLogo: "instagram",
   },
   {
     url: "https://twitter.com/immergutrocken",
-    imageUrl: "/twitter-logo.svg",
+    brandLogo: "twitter",
   },
   {
     url: "https://www.flickr.com/photos/immergutrocken",
-    imageUrl: "/flickr-logo.svg",
+    brandLogo: "flickr",
   },
 ];
 

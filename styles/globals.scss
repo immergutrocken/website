@@ -2,6 +2,10 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/brands.css";
+@import "../node_modules/@fortawesome/fontawesome-free/css/solid.css";
+
 @font-face {
   font-family: Ludwig-Bold;
   src: url("./fonts/Ludwig-Bold.otf");
