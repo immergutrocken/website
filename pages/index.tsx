@@ -17,6 +17,8 @@ import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Button from "../components/shared/button";
 import { useState } from "react";
 
+//test
+
 interface HomeProps {
   newsLinkList: INewsLink[];
   sponsorList: IPartner[];
