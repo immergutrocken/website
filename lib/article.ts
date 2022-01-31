@@ -96,7 +96,9 @@ export const getArticle = async (
     if (element._type === "imageGallery") {
       element.images.forEach((image) => {
         image.urlPreview = urlFor(image.asset).height(400).url();
+        image.urlPreviewBlur = urlFor(image.asset).height(400).blur(200).url();
         image.url = urlFor(image.asset).height(1000).url();
+        image.urlBlur = urlFor(image.asset).height(100).blur(200).url();
       });
     }
   });

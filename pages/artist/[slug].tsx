@@ -88,16 +88,16 @@ export const getStaticProps = async ({
   };
 };
 
-const imageMapping = new Map<SocialMedia, string>([
-  [SocialMedia.WEBSITE, "/website-logo.svg"],
-  [SocialMedia.YOUTUBE, "/youtube-logo.svg"],
-  [SocialMedia.FACEBOOK, "/facebook-logo.svg"],
-  [SocialMedia.TWITTER, "/twitter-logo.svg"],
-  [SocialMedia.INSTAGRAM, "/instagram-logo.svg"],
-  [SocialMedia.VIMEO, "/vimeo-logo.svg"],
-  [SocialMedia.TIKTOK, "/tiktok-logo.svg"],
-  [SocialMedia.SPOTIFY, "/spotify-logo.svg"],
-  [SocialMedia.LABEL, "/label-logo.svg"],
+const iconMapping = new Map<SocialMedia, string>([
+  [SocialMedia.WEBSITE, "fas fa-globe"],
+  [SocialMedia.YOUTUBE, "fab fa-youtube"],
+  [SocialMedia.FACEBOOK, "fab fa-facebook-f"],
+  [SocialMedia.TWITTER, "fab fa-twitter"],
+  [SocialMedia.INSTAGRAM, "fab fa-instagram"],
+  [SocialMedia.VIMEO, "fab fa-vimeo"],
+  [SocialMedia.TIKTOK, "fab fa-tiktok"],
+  [SocialMedia.SPOTIFY, "fab fa-spotify"],
+  [SocialMedia.LABEL, "fas fa-compact-disc"],
 ]);
 
 const Artist = ({
@@ -162,11 +162,7 @@ const Artist = ({
                 className="mb-3 mr-2 sm:mr-3 sm:mb-2"
               >
                 <Bubble>
-                  <NextImage
-                    src={imageMapping.get(element.type)}
-                    layout="fill"
-                    objectFit="contain"
-                  />
+                  <em className={iconMapping.get(element.type)}></em>
                 </Bubble>
               </Link>
             ))}

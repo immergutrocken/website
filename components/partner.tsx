@@ -21,6 +21,7 @@ const Partner = ({ label, className, list }: PartnerProps): JSX.Element => (
               width={partner.logo.width}
               height={partner.logo.height}
               alt={partner.logo.alt}
+              className="invert-partner"
             />
           </Link>
         </span>

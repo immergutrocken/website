@@ -6,12 +6,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        grasshopper: "#98CE58",
+        primary: "#000",
+        secondary: "#FFF",
+        tertiary: "#98CE58",
+      },
+      invert: {
+        partner: "0",
       },
     },
     fontFamily: {
       content: ["Ludwig-Normal"],
       important: ["Ludwig-Bold"],
+      icon: ["Font Awesome Free"],
     },
   },
   plugins: [],
