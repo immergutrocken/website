@@ -1,5 +1,4 @@
 import Bubble from "./shared/bubble";
-import NextImage from "next/image";
 import { IMenuItem } from "../lib/menu";
 import { MenuItemType } from "../lib/enums/menuItemType.enum";
 import Link from "./shared/link";
@@ -63,14 +62,14 @@ const Menu = ({
 
   return (
     <div
-      className={`w-full px-2 overflow-y-auto sm:w-auto sm:px-12 bg-white fixed z-20 left-0 h-full font-important ${displayClass}`}
+      className={`w-full px-2 overflow-y-auto sm:w-auto sm:px-12 bg-secondary sm:border-r-2 border-primary fixed z-20 left-0 h-full pb-6 font-important ${displayClass}`}
     >
       <Bubble className="absolute top-3 right-3" onClick={() => onClose()}>
-        <NextImage src="/close.svg" layout="fill" objectFit="contain" />
+        <em className="fas fa-times text-secondary"></em>
       </Bubble>
       <div className="mt-16 sm:mt-24">
         {items.map((item, index) => (
-          <div className="text-center text-3xl sm:text-6xl" key={index}>
+          <div className="text-3xl text-center sm:text-6xl" key={index}>
             {buildMenuItem(item, onClose, router.locale)}
           </div>
         ))}
@@ -81,7 +80,7 @@ const Menu = ({
           locale={router.locale === "de" ? "en" : "de"}
         >
           <a>
-            <Bubble className="text-xl pt-2 sm:text-3xl sm:pt-3 font-important">
+            <Bubble className="text-xl sm:text-3xl font-important">
               {router.locale === "de" ? "en" : "de"}
             </Bubble>
           </a>

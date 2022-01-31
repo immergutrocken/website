@@ -40,7 +40,11 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
   }, [key, hidden, notification.startDate, notification.endDate]);
 
   const buildFooterNotification = (): JSX.Element => (
-    <div className={`bg-white p-3 ${hidden ? "hidden" : ""}`}>
+    <div
+      className={`bg-secondary border-t-2 border-primary p-3 sm:pt-6 ${
+        hidden ? "hidden" : ""
+      }`}
+    >
       <div className="text-3xl sm:text-6xl font-important">
         {notification.title}
       </div>
@@ -67,7 +71,7 @@ const Notification = ({ notification }: NotificationProps): JSX.Element => {
         hidden ? "hidden" : ""
       }`}
     >
-      <div className="bg-white p-5 w-1/2 self-center">
+      <div className="self-center w-1/2 p-5 bg-white">
         <div className="text-3xl sm:text-6xl">{notification.title}</div>
         <div className="font-content">
           <Content content={notification.content} />

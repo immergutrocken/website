@@ -16,17 +16,15 @@ const Bubble = ({
 }: BubbleProps): JSX.Element => {
   const sizeClasses =
     size === "large"
-      ? "w-9 h-9 sm:w-14 sm:h-14 px-1 py-2 sm:p-3"
-      : "w-9 h-9 px-1 py-2";
+      ? "w-9 h-9 sm:w-14 sm:h-14 text-xl sm:text-3xl"
+      : "w-9 h-9 text-xl";
 
   return (
     <button
-      className={`bg-black rounded-full flex justify-center items-center cursor-pointer sm:transition-transform sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-110 focus:outline-none ${className} ${sizeClasses}`}
+      className={`bg-primary rounded-full flex justify-center items-center cursor-pointer sm:transition-transform sm:duration-300 sm:ease-in-out sm:transform sm:hover:scale-110 focus:outline-none text-secondary ${className} ${sizeClasses}`}
       onClick={() => onClick()}
     >
-      <span className="text-white relative min-h-full min-w-full">
-        {children}
-      </span>
+      {children}
     </button>
   );
 };
