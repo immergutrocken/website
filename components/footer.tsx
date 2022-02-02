@@ -24,37 +24,24 @@ const Footer = ({
       <div className="mt-8 sm:mt-12">
         <NewsletterRegistration />
       </div>
-      <div className="flex flex-row flex-wrap justify-center mt-4">
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-8">
         {socialMedia.map((element, index) => (
-          <Link
-            href={element.url}
-            key={index}
-            className="mx-2 mb-3 sm:mx-3 sm:mb-0"
-          >
+          <Link href={element.url} key={index}>
             <Bubble>
               <em className={`fab fa-${element.brandLogo}`}></em>
             </Bubble>
           </Link>
         ))}
       </div>
-      <div className="grid grid-cols-1 p-3 lg:grid-cols-3">
-        <Partner
-          label={t("sponsors").toString()}
-          list={sponsorList}
-          className="mt-4 sm:mt-6"
-        />
+      <div className="grid grid-cols-1 gap-4 px-3 mt-10 lg:grid-cols-3 sm:gap-6">
+        <Partner label={t("sponsors").toString()} list={sponsorList} />
         <Partner
           label={t("media-partners").toString()}
           list={mediaPartnerList}
-          className="mt-4 sm:mt-6"
         />
-        <Partner
-          label={t("supported-by").toString()}
-          list={additionalList}
-          className="mt-4 sm:mt-6"
-        />
+        <Partner label={t("supported-by").toString()} list={additionalList} />
       </div>
-      <div className="w-full max-w-3xl p-3 pb-6 mx-auto text-center sm:pb-10 font-content">
+      <div className="w-full max-w-3xl px-3 pb-6 mx-auto mt-8 text-center sm:pb-10 font-content">
         <p>
           Immergut Festival / Am Bürgerseeweg 28 / 17235 Neustrelitz
           <br />
