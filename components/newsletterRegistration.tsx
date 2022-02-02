@@ -40,7 +40,7 @@ const NewsletterRegistration = (): JSX.Element => {
       <h2 className="text-3xl text-center sm:text-6xl font-important">
         {t("newsletter")}
       </h2>
-      <div className="flex flex-row justify-center mt-4 space-x-2">
+      <div className="flex flex-row justify-center mt-2 space-x-2">
         <input
           className={`${
             isValid ? "" : styles.invalid

@@ -10,7 +10,6 @@ import Layout from "../components/layout";
 import { getNotificationList, INotification } from "../lib/notification";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
-import Label from "../components/shared/label";
 import bannerMobile from "../public/images/ig-website-mobile-motto.png";
 import bannerDesktop from "../public/images/ig-website-desktop-motto.png";
 import { ArtistCategory } from "../lib/enums/artistCategory.enum";
@@ -82,9 +81,6 @@ export default function Home(props: HomeProps): JSX.Element {
           layout="responsive"
           placeholder="blur"
         />
-      </div>
-      <div className="mt-4 text-3xl text-center sm-mt-6">
-        <Label>Line Up</Label>
       </div>
       <div className="flex justify-center mt-4 sm:mt-6">
         {props.artistLinkList.some(
