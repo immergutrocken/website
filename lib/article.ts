@@ -34,23 +34,60 @@ export const getArticle = async (
     "titleEn": languages.en.title,
     "banner": languages.de.banner,
     author,
-    "contentDe": languages.de.content[]{..., asset->{..., "_key": _id}, markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "docType": @.reference->_type,
-        "slug": @.reference->slug.current
+    "contentDe": languages.de.content[] {
+      ..., 
+      asset->{..., "_key": _id}, 
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "docType": @.reference->_type,
+          "slug": @.reference->slug.current
+        }
       },
-    }},
-    "contentEn": languages.en.content[]{..., asset->{..., "_key": _id}, markDefs[]{
-      ...,
-      _type == "internalLink" => {
-        "docType": @.reference->_type,
-        "slug": @.reference->slug.current
-      },
+      _type == "expander" => {
+        ...,
+        content[] {
+          ...,
+          markDefs[]{
+            ...,
+            _type == "internalLink" => {
+              "docType": @.reference->_type,
+              "slug": @.reference->slug.current
+            }
+          }
+        }
+      }
     },
-    }}`;
+    "contentEn": languages.en.content[] {
+      ..., 
+      asset->{
+        ..., "_key": _id
+      }, 
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "docType": @.reference->_type,
+          "slug": @.reference->slug.current
+        },
+      },
+      _type == "expander" => {
+        ...,
+        content[] {
+          ...,
+          markDefs[]{
+            ...,
+            _type == "internalLink" => {
+              "docType": @.reference->_type,
+              "slug": @.reference->slug.current
+            }
+          }
+        }
+      }
+    }
+  }`;
 
   const result = (await client.fetch(query))[0];
+  console.log(result);
 
   const article = {
     ...result,
