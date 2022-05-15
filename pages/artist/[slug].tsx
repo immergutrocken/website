@@ -126,6 +126,11 @@ const Artist = ({
     >
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
+        <meta
+          property="og:title"
+          content={`${title} &minus; ${t("festival")}`}
+        />
+        <meta property="og:image" content={banner.url} />
       </NextHead>
       <div className="grid h-full grid-cols-1 sm:grid-cols-2 sm:space-x-5 sm:px-6 sm:pt-6">
         <div
