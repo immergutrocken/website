@@ -109,6 +109,8 @@ const Article = ({
             {
               url: banner.url,
               type: "image/png",
+              height: 300,
+              width: 300,
             },
           ],
         }}
