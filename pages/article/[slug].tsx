@@ -16,6 +16,7 @@ import { getPartnerList, IPartner } from "../../lib/partner";
 import PartnerCategory from "../../lib/enums/partnerCategory.enum";
 import { getMenu, IMenuItem } from "../../lib/menu";
 import { getNewsLinkList, INewsLink } from "../../lib/news";
+import { NextSeo } from "next-seo";
 
 interface ArticleParams extends ParsedUrlQuery {
   slug: string;
@@ -80,7 +81,6 @@ const Article = ({
   banner,
   content,
   author,
-  ogDescription,
   notificationList,
   sponsorList,
   mediaPartnerList,
@@ -101,13 +101,18 @@ const Article = ({
     >
       <NextHead>
         <title>{`${title} - ${t("festival")}`}</title>
-        <meta
-          property="og:title"
-          content={`${title} &minus; ${t("festival")}`}
-        />
-        <meta property="og:image" content={banner.url} />
-        <meta property="og:description" content={ogDescription} />
       </NextHead>
+      <NextSeo
+        title={`${title} &minus; ${t("festival")}`}
+        openGraph={{
+          images: [
+            {
+              url: banner.url,
+              type: "image/png",
+            },
+          ],
+        }}
+      />
       <div className="grid h-full grid-cols-1 sm:grid-cols-2 sm:space-x-5 sm:px-6 sm:pt-6">
         <div
           className={`relative top-9 sm:sticky sm:top-0 sm:max-h-screen sm:h-full flex items-center`}

@@ -15,7 +15,7 @@ import bannerDesktop from "../public/images/ig-website-desktop-motto.png";
 import { ArtistCategory } from "../lib/enums/artistCategory.enum";
 import Button from "../components/shared/button";
 import { useState } from "react";
-import { useRouter } from "next/router";
+import { NextSeo } from "next-seo";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -51,7 +51,6 @@ export const getStaticProps = async ({
 export default function Home(props: HomeProps): JSX.Element {
   const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const t = useTranslations("Home");
-  const router = useRouter();
 
   return (
     <Layout
@@ -65,13 +64,18 @@ export default function Home(props: HomeProps): JSX.Element {
       <NextHead>
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content={`${t("festival")}`} />
-        <meta property="og:image" content="/ig-website-desktop-motto.png" />
-        <meta
-          property="og:url"
-          content={"https://immergutrocken.de" + router.asPath}
-        />
       </NextHead>
+      <NextSeo
+        title={t("festival")}
+        openGraph={{
+          images: [
+            {
+              url: bannerDesktop.src,
+              type: "image/png",
+            },
+          ],
+        }}
+      />
       <div className="block pt-9 sm:hidden">
         <NextImage
           src={bannerMobile}
