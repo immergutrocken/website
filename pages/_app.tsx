@@ -7,6 +7,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <NextIntlProvider messages={pageProps.messages}>
       <DefaultSeo
+        defaultOpenGraphImageHeight={300}
+        defaultOpenGraphImageWidth={300}
         twitter={{
           handle: "@handle",
           site: "@site",
