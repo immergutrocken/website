@@ -85,9 +85,29 @@ export const getArtist = async (
     'banner': languages.de.banner,
     author,
     socialMedia,
-    'contentDe': languages.de.content,
-    'contentEn': languages.en.content
-    }`;
+    'contentDe': languages.de.content[] {
+      ..., 
+      asset->{..., "_key": _id}, 
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "docType": @.reference->_type,
+          "slug": @.reference->slug.current
+        }
+      }
+    },
+    'contentEn': languages.en.content[] {
+      ..., 
+      asset->{..., "_key": _id}, 
+      markDefs[]{
+        ...,
+        _type == "internalLink" => {
+          "docType": @.reference->_type,
+          "slug": @.reference->slug.current
+        }
+      }
+    }
+  }`;
   const result = (await client.fetch(query))[0];
   return {
     ...result,
