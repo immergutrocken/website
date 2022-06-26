@@ -22,6 +22,7 @@ interface LayoutProps {
   additionalList: IPartner[];
   menuItems: IMenuItem[];
   newsList: INewsLink[];
+  showNewsList?: boolean;
 }
 
 const Layout = ({
@@ -32,6 +33,7 @@ const Layout = ({
   additionalList,
   menuItems,
   newsList,
+  showNewsList = true,
 }: LayoutProps): JSX.Element => {
   const [showMenu, setShowMenu] = useState(false);
   const router = useRouter();
@@ -39,53 +41,57 @@ const Layout = ({
 
   return (
     <div className="text-primary bg-secondary">
-      <header>
-        <div className="fixed top-0 z-10 flex w-full py-1 text-lg border-b-2 bg-secondary border-primary flex-nowrap sm:text-4xl font-important">
-          <span className="flex items-center px-1 sm:px-2">{t("news")}:</span>
-          <div
-            className={
-              "flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap w-full scrollbar"
-            }
+      <header className="fixed top-0 z-10 flex flex-col w-full">
+        {showNewsList && (
+          <div className="flex w-full py-1 text-lg border-b-2 bg-secondary border-primary flex-nowrap sm:text-4xl font-important">
+            <span className="flex items-center px-1 sm:px-2">{t("news")}:</span>
+            <div
+              className={
+                "flex flex-nowrap overflow-x-auto overflow-y-hidden whitespace-nowrap w-full scrollbar"
+              }
+            >
+              {newsList.map((news, index) => (
+                <span key={index}>
+                  <NextLink href={`/article/${news.slug}`}>
+                    <a className="mx-2 sm:mx-4">{news.title}</a>
+                  </NextLink>
+                  {index === newsList.length - 1 ? "" : "•"}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="flex justify-between mt-2 sm:mt-4 sm:mx-4">
+          <Bubble
+            className="left-2 top-12 sm:left-4 sm:top-16"
+            onClick={() => setShowMenu(true)}
           >
-            {newsList.map((news, index) => (
-              <span key={index}>
-                <NextLink href={`/article/${news.slug}`}>
-                  <a className="mx-2 sm:mx-4">{news.title}</a>
-                </NextLink>
-                {index === newsList.length - 1 ? "" : "•"}
-              </span>
-            ))}
+            <em className="fas fa-bars text-secondary"></em>
+          </Bubble>
+          <div className="flex gap-2 right-2 top-12 sm:right-4 sm:top-16 sm:gap-4">
+            <Link
+              href="https://immergut.tickettoaster.de/tickets"
+              className="hover:no-underline"
+            >
+              <Button className="!bg-tertiary">{t("ticket-shop")}</Button>
+            </Link>
+            <NextLink
+              href={router.asPath}
+              locale={router.locale === "de" ? "en" : "de"}
+            >
+              <a>
+                <Bubble className="text-xl sm:text-3xl font-important">
+                  {router.locale === "de" ? "en" : "de"}
+                </Bubble>
+              </a>
+            </NextLink>
           </div>
         </div>
-        <Bubble
-          className="fixed z-10 left-2 top-12 sm:left-4 sm:top-16"
-          onClick={() => setShowMenu(true)}
-        >
-          <em className="fas fa-bars text-secondary"></em>
-        </Bubble>
         <Menu
           showMenu={showMenu}
           onClose={() => setShowMenu(false)}
           items={menuItems}
         />
-        <div className="fixed z-10 flex gap-2 right-2 top-12 sm:right-4 sm:top-16 sm:gap-4">
-          <Link
-            href="https://immergut.tickettoaster.de/tickets"
-            className="hover:no-underline"
-          >
-            <Button className="!bg-tertiary">{t("ticket-shop")}</Button>
-          </Link>
-          <NextLink
-            href={router.asPath}
-            locale={router.locale === "de" ? "en" : "de"}
-          >
-            <a>
-              <Bubble className="text-xl sm:text-3xl font-important">
-                {router.locale === "de" ? "en" : "de"}
-              </Bubble>
-            </a>
-          </NextLink>
-        </div>
       </header>
       <main>{children}</main>
       <footer>
