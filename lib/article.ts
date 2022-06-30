@@ -50,6 +50,7 @@ export const getArticle = async (
         ...,
         content[] {
           ...,
+          asset->{..., "_key": _id},
           markDefs[]{
             ...,
             _type == "internalLink" => {
@@ -76,6 +77,7 @@ export const getArticle = async (
         ...,
         content[] {
           ...,
+          asset->{..., "_key": _id},
           markDefs[]{
             ...,
             _type == "internalLink" => {
