@@ -61,7 +61,7 @@ const Layout = ({
             </div>
           </div>
         )}
-        <div className="flex justify-between mt-2 sm:mt-4 sm:mx-4">
+        <div className="flex justify-between mx-2 mt-2 sm:mt-4 sm:mx-4">
           <Bubble
             className="left-2 top-12 sm:left-4 sm:top-16"
             onClick={() => setShowMenu(true)}
