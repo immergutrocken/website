@@ -10,11 +10,12 @@ import Layout from "../components/layout";
 import { getNotificationList, INotification } from "../lib/notification";
 import { GetStaticPropsContext, GetStaticPropsResult } from "next";
 import { useTranslations } from "next-intl";
-import bannerMobile from "../public/images/ig-website-mobile-motto.png";
-import bannerDesktop from "../public/images/ig-website-desktop-motto.png";
-import { ArtistCategory } from "../lib/enums/artistCategory.enum";
-import Button from "../components/shared/button";
-import { useState } from "react";
+import bannerMobile from "../public/images/ig-website-mobile-cd.png";
+import bannerDesktop from "../public/images/ig-website-desktop-cd.png";
+// import { ArtistCategory } from "../lib/enums/artistCategory.enum";
+// import Button from "../components/shared/button";
+// import { useState } from "react";
+import Label from "../components/shared/label";
 import { NextSeo } from "next-seo";
 
 interface HomeProps {
@@ -49,8 +50,9 @@ export const getStaticProps = async ({
 };
 
 export default function Home(props: HomeProps): JSX.Element {
-  const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
+  // const [filterCategory, setFilterCategory] = useState<ArtistCategory>(null);
   const t = useTranslations("Home");
+  const showNewsList = false;
 
   return (
     <Layout
@@ -60,6 +62,7 @@ export default function Home(props: HomeProps): JSX.Element {
       additionalList={props.additionalList}
       menuItems={props.menuItems}
       newsList={props.newsLinkList}
+      showNewsList={showNewsList}
     >
       <NextHead>
         <title>{t("festival")}</title>
@@ -76,7 +79,7 @@ export default function Home(props: HomeProps): JSX.Element {
           ],
         }}
       />
-      <div className="block pt-9 sm:hidden">
+      <div className={`block ${showNewsList ? "pt-9" : ""} sm:hidden`}>
         <NextImage
           src={bannerMobile}
           width={bannerMobile.width}
@@ -85,7 +88,7 @@ export default function Home(props: HomeProps): JSX.Element {
           placeholder="blur"
         />
       </div>
-      <div className="hidden sm:pt-10 sm:block">
+      <div className={`hidden ${showNewsList ? "sm:pt-10" : ""} sm:block`}>
         <NextImage
           src={bannerDesktop}
           width={bannerDesktop.width}
@@ -95,7 +98,8 @@ export default function Home(props: HomeProps): JSX.Element {
         />
       </div>
       <div className="flex justify-center mt-4 sm:mt-6">
-        {props.artistLinkList.some(
+        <Label>{t("news")}</Label>
+        {/* {props.artistLinkList.some(
           (link) => link.category === ArtistCategory.MUSIC
         ) && (
           <Button
@@ -135,10 +139,10 @@ export default function Home(props: HomeProps): JSX.Element {
           >
             {t("readings").toString()}
           </Button>
-        )}
+        )} */}
       </div>
       <div className="flex flex-row flex-wrap justify-center mt-4 text-3xl text-center sm:mt-6 sm:text-5xl font-important">
-        {props.artistLinkList
+        {/* {props.artistLinkList
           .filter((link) =>
             filterCategory === null ? true : link.category === filterCategory
           )
@@ -149,7 +153,15 @@ export default function Home(props: HomeProps): JSX.Element {
               </NextLink>
               {index === array.length - 1 ? "" : "•"}
             </span>
-          ))}
+          ))} */}
+        {props.newsLinkList.map((link, index, array) => (
+          <span key={index}>
+            <NextLink href={`/article/${link.slug}`}>
+              <a className="mx-2 sm:mx-5">{link.title}</a>
+            </NextLink>
+            {index === array.length - 1 ? "" : "•"}
+          </span>
+        ))}
       </div>
     </Layout>
   );
