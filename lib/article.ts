@@ -13,6 +13,7 @@ export interface IArticle {
     urlWithBlur: string;
   };
   author: string;
+  ogDescription: string;
   content: [];
 }
 
@@ -34,6 +35,7 @@ export const getArticle = async (
     "titleEn": languages.en.title,
     "banner": languages.de.banner,
     author,
+    ogDescription,
     "contentDe": languages.de.content[] {
       ..., 
       asset->{..., "_key": _id}, 

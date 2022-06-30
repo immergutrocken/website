@@ -16,6 +16,7 @@ import bannerDesktop from "../public/images/ig-website-desktop-cd.png";
 // import Button from "../components/shared/button";
 // import { useState } from "react";
 import Label from "../components/shared/label";
+import { NextSeo } from "next-seo";
 
 interface HomeProps {
   newsLinkList: INewsLink[];
@@ -67,6 +68,17 @@ export default function Home(props: HomeProps): JSX.Element {
         <title>{t("festival")}</title>
         <link rel="icon" href="/favicon.ico" />
       </NextHead>
+      <NextSeo
+        title={t("festival")}
+        openGraph={{
+          images: [
+            {
+              url: bannerDesktop.src,
+              type: "image/png",
+            },
+          ],
+        }}
+      />
       <div className={`block ${showNewsList ? "pt-9" : ""} sm:hidden`}>
         <NextImage
           src={bannerMobile}
